@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
 	RoboteqDevice device;
 	int status = device.Connect("/dev/ttyACM0");
 
+	cout << "made it past connection function..." << endl;
+
 	if(status != RQ_SUCCESS)
 	{
 		cout<<"Error connecting to device: "<<status<<"."<<endl;
