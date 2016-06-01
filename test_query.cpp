@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 		if(com_status1) {
 			cout << "ERROR: " << com_status1 << endl;
 		}
-		float A1;
+		int A1;
 		if((status = device.GetValue(_A, 1, A1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
 		else {
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 		if(com_status2) {
 			cout << "ERROR: " << com_status1 << endl;
 		}
-		float A2;
+		int A2;
 		if((status = device.GetValue(_A, 2, A2)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
 		else {
