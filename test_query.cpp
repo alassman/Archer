@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
 		//Check RPM
 
-		vector<char> rpm1(5);
+		char *rpm1[5];
 		cout << "GetValue(_S, 1, rpm1)" << endl;
 		if((status = device.GetValue(_S, 1, rpm1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 
-		vector<char> rpm2(5);
+		char *rpm2[5];
 		cout << "GetValue(_S, 1, rpm2)" << endl;
 		if((status = device.GetValue(_S, 2, rpm2)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
