@@ -81,20 +81,37 @@ int main(int argc, char *argv[])
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 	}	
-	cout << "will print if amperage on motor1 exceeds 1 amp" << endl;
-	for(int i = 0; i < 100; ++i) {
+	cout << "will print if amperage on motor1 or motor 2 exceeds 1 amp" << endl;
+	for(int i = 0; i < 500; ++i) {
 		int com_status1 = device.SetCommand(_S, 1, 100);
 		if(com_status1) {
 			cout << "ERROR: " << com_status1 << endl;
 		}
-		int A1;
+		float A1;
 		if((status = device.GetValue(_A, 1, A1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
 		else {
 			if(A1 > 1) {
-				cout << "Amps for motor1 exceeds 1 amp" << endl;
-				cout << "Amperage: " << A1 << endl;
+				// cout << "Amps for motor1 exceeds 1 amp" << endl;
+				// cout << "Amperage: " << A1 << endl;
+				cout << "************************" << endl;
 			}
+			cout << "Amperage: " << A1 << endl;
+		}
+		int com_status2 = device.SetCommand(_S, 2, 100);
+		if(com_status2) {
+			cout << "ERROR: " << com_status1 << endl;
+		}
+		float A2;
+		if((status = device.GetValue(_A, 2, A2)) != RQ_SUCCESS)
+			cout<<"failed --> "<<status<<endl;
+		else {
+			if(A2 > 1) {
+				// cout << "Amps for motor2 exceeds 1 amp" << endl;
+				// cout << "Amperage: " << A2 << endl;
+				cout << "************************" << endl;
+			}
+			cout << "Amperage: " << A2 << endl;
 		}
 
 	}
