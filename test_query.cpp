@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		if(com_status1) {
 			cout << "ERROR: " << com_status1 << endl;
 		}
-		int com_status2 = device.SetCommand(_S, 2, 100);
+		int com_status2 = device.SetCommand(_S, 2, -100);
 		if(com_status2) {
 			cout << "ERROR: " << com_status2 << endl;
 		}
@@ -37,17 +37,18 @@ int main(int argc, char *argv[])
 		int rpm1;
 		if((status = device.GetValue(_S, 1, rpm1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
-		else
-			cout << "rpm for motor 1: " << rpm1 << endl;
-
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 
 		int rpm2;
 		if((status = device.GetValue(_S, 2, rpm2)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
-		else
-			cout << "rpm for motor 2: " << rpm2 << endl;
+
+
+
+		cout << "RPM = " << rpm1 << " : " << rpm2 << endl;
+
+
 
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
@@ -59,6 +60,12 @@ int main(int argc, char *argv[])
 		if(com_status1) {
 			cout << "ERROR: " << com_status1 << endl;
 		}
+		sleepms(10);
+		int com_status2 = device.SetCommand(_S, 2, 100);
+		if(com_status2) {
+			cout << "ERROR: " << com_status1 << endl;
+		}
+		sleepms(10);
 		int A1;
 		if((status = device.GetValue(_A, 1, A1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
@@ -67,10 +74,7 @@ int main(int argc, char *argv[])
 				cout << "MOTOR 1 amperage: " << A1 << endl;
 			}
 		}
-		int com_status2 = device.SetCommand(_S, 2, 100);
-		if(com_status2) {
-			cout << "ERROR: " << com_status1 << endl;
-		}
+		sleepms(10);
 		int A2;
 		if((status = device.GetValue(_A, 2, A2)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
@@ -79,7 +83,7 @@ int main(int argc, char *argv[])
 				cout << "MOTOR 2 amperage: " << A2 << endl;
 			}
 		}
-
+		sleepms(10);
 	}
 
 	device.Disconnect();
