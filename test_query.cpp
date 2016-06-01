@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 
 		//Check RPM
 
-		vector<char> rpm1(10,100)
+		int rpm1;
 		cout << "GetValue(_S, 1, rpm1)" << endl;
 		if((status = device.GetValue(_S, 1, rpm1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 
-		vector<char> rpm2(10,100);
-		cout << "GetValue(_S, 1, rpm2)" << endl;
+		int rpm2;
+		cout << "GetValue(_S, 2, rpm2)" << endl;
 		if((status = device.GetValue(_S, 2, rpm2)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
 		else
@@ -56,14 +56,8 @@ int main(int argc, char *argv[])
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 
-		for (int i = 0; i < rpm1.size(); ++i)
-		{
-			cout << rpm1[i];
-		}
-		for (int i = 0; i < rpm2.size(); ++i)
-		{
-			cout << rpm2[i];
-		}
+		cout << "rpm for motor 1: " << rpm1 << endl;
+		cout << "rpm for motor 2: " << rpm2 << endl;
 	}	
 	sleepms(10);
 	// for(int i = 0; i < 500; ++i) {
