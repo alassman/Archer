@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
+#include <vector>
 
 #include "RoboteqDevice.h"
 #include "ErrorCodes.h"
@@ -35,22 +36,22 @@ int main(int argc, char *argv[])
 
 		//Check RPM
 
-		char *rpm1[5];
+		vector<char> rpm1(10,100)
 		cout << "GetValue(_S, 1, rpm1)" << endl;
 		if((status = device.GetValue(_S, 1, rpm1)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
 		else
-			cout<<"returned --> "<<result<<endl;
+			cout<<"returned --> "<<endl;
 
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 
-		char *rpm2[5];
+		vector<char> rpm2(10,100);
 		cout << "GetValue(_S, 1, rpm2)" << endl;
 		if((status = device.GetValue(_S, 2, rpm2)) != RQ_SUCCESS)
 			cout<<"failed --> "<<status<<endl;
 		else
-			cout<<"returned --> "<<result<<endl;
+			cout<<"returned --> "<<endl;
 
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
