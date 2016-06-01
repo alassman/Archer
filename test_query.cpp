@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 			cout<<"failed --> "<<status<<endl;
 		else {
 			if(A1 > 5) {
-				cout << "MOTOR 1 exceeds 5 amp" << endl;
+				cout << "MOTOR 1 amperage: " << A1 << endl;
 			}
 		}
 		int com_status2 = device.SetCommand(_S, 2, 100);
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 			cout<<"failed --> "<<status<<endl;
 		else {
 			if(A2 > 5) {
-				cout << "MOTOR 2 exceeds 5 amps" << endl;
+				cout << "MOTOR 2 amperage: " << A2 << endl;
 			}
 		}
 
