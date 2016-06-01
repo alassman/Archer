@@ -33,13 +33,12 @@ class Archer : public Robot
 		MOTORDATA *pMotorData;
 		int Lmotor;
 		int Rmotor;
-		float mLastLeftEncoderCount;
-		float mLastRightEncoderCount;
 	public:
-		Archer(float period, float track, float encoderScaleFactor, char *pMotorInfo, char *sensorInfo = 0);
+		Archer(float period, float track, float encoderScaleFactor, float proportional_gain, 
+			float integral_gain, float differential_gain, float ppr);
 		virtual ~Archer();
 		virtual int readSensors();
-		virtual void setActuators(char *pMotorSpeed);
+		virtual void setActuators(vector<int> MotorSpeed);
 		virtual void setActuators(float speed, float rate);
 };
 

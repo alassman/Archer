@@ -3,8 +3,8 @@ CC=g++ -g -Wall
 
 all: go
 
-go: RoboteqDevice.o test_query.cpp
-	$(CC) RoboteqDevice.o test_query.cpp -o go
+go: RoboteqDevice.o test_class.cpp
+	$(CC) RoboteqDevice.o test_class.cpp -o go
 
 RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h
 	$(CC) -c RoboteqDevice.cpp

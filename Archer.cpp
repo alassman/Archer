@@ -154,7 +154,8 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 Archer::~Archer() {
 	device.Disconnect();
 }
-void Archer::setActuators(char *pMotorSpeed) {
+void Archer::setActuators(vector<int> MotorSpeed) {
+	assert(MotorSpeed.size() == 2 && "MotorSpeed vector malformed");
 /* Question
 is this the structure of the array you're looking for?
 what array of chars and not ints?
@@ -163,13 +164,14 @@ what array of chars and not ints?
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of Lmotor
 	//second value is speed of Rmotor
+
 	int status;
-	if((status = device.SetCommand(_S, Lmotor, *pMotorSpeed)) != RQ_SUCCESS)
+	if((status = device.SetCommand(_S, Lmotor, MotorSpeed[0])) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-	if((status = device.SetCommand(_S, Rmotor, *(pMotorSpeed+1)) != RQ_SUCCESS)
+	if((status = device.SetCommand(_S, Rmotor, MotorSpeed[1]) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -186,12 +188,10 @@ what is rate in this case? ... units
 	//m/s * rot/m * s/minute = rot/minute
 	float rpm = speed * 4 * 60;
 
-	char pMotorSpeed[2];
-	pMotorSpeed[0] = rpm;
-	pMotorSpeed[1] = rpm;
+	vector<int> MotorSpeed(2, rpm);
 
 	//Send motor commands
-	setActuators(pMotorSpeed);
+	setActuators(MotorSpeed);
 	cout << "Archer SPEED RATE: " << speed << " " << math_functions::rad2deg(rate) << endl;
 }
 
