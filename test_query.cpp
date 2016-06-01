@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
 	//Wait 10 ms before sending another command to device
 	sleepms(10);
 	for(int i = 0; i < 100; ++i) {
-		int com_status1 = device.SetCommand(_S, 1, i);
+		int com_status1 = device.SetCommand(_S, 1, 100);
 		if(com_status1) {
 			cout << "ERROR: " << com_status1 << endl;
 		}
-		int com_status2 = device.SetCommand(_S, 2, i);
+		int com_status2 = device.SetCommand(_S, 2, 100);
 		if(com_status2) {
 			cout << "ERROR: " << com_status2 << endl;
 		}
