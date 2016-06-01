@@ -81,17 +81,23 @@ int main(int argc, char *argv[])
 		//Wait 10 ms before sending another command to device
 		sleepms(10);
 	}	
-	// for(int i = 0; i < 500; ++i) {
-	// 	int com_status1 = device.SetCommand(_S, 1, 100);
-	// 	if(com_status1) {
-	// 		cout << "ERROR: " << com_status1 << endl;
-	// 	}
-	// 	int com_status2 = device.SetCommand(_S, 2, 100);
-	// 	if(com_status2) {
-	// 		cout << "ERROR: " << com_status2 << endl;
-	// 	}
-	// 	cout << i << endl;
-	// }	
+	cout << "will print if amperage on motor1 exceeds 1 amp" << endl;
+	for(int i = 0; i < 100; ++i) {
+		int com_status1 = device.SetCommand(_S, 1, 100);
+		if(com_status1) {
+			cout << "ERROR: " << com_status1 << endl;
+		}
+		int A1;
+		if((status = device.GetValue(_A, 1, A1)) != RQ_SUCCESS)
+			cout<<"failed --> "<<status<<endl;
+		else {
+			if(A1 > 1) {
+				cout << "Amps for motor1 exceeds 1 amp" << endl;
+				cout << "Amperage: " << A1 << endl;
+			}
+		}
+
+	}
 
 	device.Disconnect();
 	return 0;
