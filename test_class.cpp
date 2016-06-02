@@ -12,8 +12,7 @@ using namespace std;
 int main() {
 	//Archer(float period, float track, float encoderScaleFactor);
 
-	//Archer robot(10.0, 2.0, 300.0);
-	Archer robot();
+	Archer robot(10, 2, 300);
 	// vector<int> Mcommand;
 	// Mcommand.push_back(-100);
 	// Mcommand.push_back(100);
