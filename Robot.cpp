@@ -83,6 +83,8 @@ void Robot::checkTimming()
 	mCounter++;
 }
 
+//convertsspeed and rate intocounts per second which is stored in pCountSec array (passed by reference)
+
 void Robot::speedRate2Counts(float speed, float rate, int *pCountSec)
 {
 	//Compute left and right encoder counts per second
@@ -90,27 +92,27 @@ void Robot::speedRate2Counts(float speed, float rate, int *pCountSec)
 	float right_speed = (speed + rate * mTrack / 2.0) / mEncoderScaleFactor;
 	
 	//Round values to the clossest integer
-	pCountSec[LEFT] = (left_speed > 0) ? (left_speed + .5) : (left_speed - 0.5);
-	pCountSec[RIGHT] = (right_speed > 0) ? (right_speed + .5) : (right_speed - 0.5);
+	pCountSec[0] = (left_speed > 0) ? (left_speed + .5) : (left_speed - 0.5);
+	pCountSec[1] = (right_speed > 0) ? (right_speed + .5) : (right_speed - 0.5);
 
 	//If there is some speed, even very tiny, we want to keep it. This prevents the robot from getting stuck.
-	if(!pCountSec[LEFT] && left_speed) pCountSec[LEFT] = (left_speed > 0) ? 1 : -1;
-	if(!pCountSec[RIGHT] && right_speed) pCountSec[RIGHT] = (right_speed > 0) ? 1 : -1;
+	if(!pCountSec[0] && left_speed) pCountSec[0] = (left_speed > 0) ? 1 : -1;
+	if(!pCountSec[1] && right_speed) pCountSec[1] = (right_speed > 0) ? 1 : -1;
 
 	// Verify that the motor speed does not exceed the limitations of the encoder counter reader
 	// this limit is set by the microcontroller that reads the encoder signals
-	if((fabs(pCountSec[LEFT]) > mEncoderCountSecLimit || fabs(pCountSec[RIGHT]) > mEncoderCountSecLimit))
+	if((fabs(pCountSec[0]) > mEncoderCountSecLimit || fabs(pCountSec[1]) > mEncoderCountSecLimit))
 	{
-		float speed_reduction = (fabs(pCountSec[LEFT]) > fabs(pCountSec[RIGHT])) ? fabs(pCountSec[LEFT]) : fabs(pCountSec[RIGHT]);
+		float speed_reduction = (fabs(pCountSec[0]) > fabs(pCountSec[1])) ? fabs(pCountSec[0]) : fabs(pCountSec[1]);
 		speed_reduction /= mEncoderCountSecLimit;
-		cout << "Max encoder speed exceeded by: " << speed_reduction << " Bef: "<<pCountSec[LEFT] << " " << pCountSec[RIGHT];
-		pCountSec[LEFT] /= speed_reduction; 
-		pCountSec[RIGHT] /= speed_reduction; 
+		cout << "Max encoder speed exceeded by: " << speed_reduction << " Bef: "<<pCountSec[0] << " " << pCountSec[1];
+		pCountSec[0] /= speed_reduction; 
+		pCountSec[1] /= speed_reduction; 
 		cout << " LIMIT: "<< mEncoderCountSecLimit ;
-		cout << " Aft: "<<pCountSec[LEFT] << " " << pCountSec[RIGHT] << endl;
+		cout << " Aft: "<<pCountSec[0] << " " << pCountSec[1] << endl;
 	}
 
-	cout << "ROBOT: " << speed << " " << math_functions::rad2deg(rate) << " " << left_speed << "/" << (int)pCountSec[LEFT] << " " << right_speed << "/" << (int)pCountSec[RIGHT] << endl;
+	cout << "ROBOT: " << speed << " " << math_functions::rad2deg(rate) << " " << left_speed << "/" << (int)pCountSec[0] << " " << right_speed << "/" << (int)pCountSec[1] << endl;
 
 }
 	

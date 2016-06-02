@@ -23,6 +23,8 @@
 
 #include <sys/time.h>
 
+ using namespace std;
+
 const int DATA_READY = 1;
 const int NAME_SIZE = 10;
 const float SEC2USEC = 1e6;
@@ -53,10 +55,10 @@ class Robot
 	void speedRate2Counts(float speed, float rate, int *pCountSec);
 
 	public:
-		Robot(float period, float track, float encoderScaleFactor, char *pMotorInfo = 0, char *sensorInfo = 0);
+		Robot(float period, float track, float encoderScaleFactor);
 		virtual ~Robot();
 		virtual int readSensors() = 0;
-		virtual void setActuators(char *pMotorSpeed) = 0;
+		virtual void setActuators(vector<int> MotorSpeed) = 0;
 		virtual void setActuators(float speed, float rate) = 0;
 		virtual void setEncoderLimit(int pCountSecLimit);
 		inline float getDisplacement() const {return mDisplacement;};

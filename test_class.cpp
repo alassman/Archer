@@ -1,21 +1,24 @@
-#include "Archer.h"
-#include <vector>
-#include <string.h>
 #include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+
+#include "Archer.h"
 
 using namespace std;
 
 
 
-
 int main() {
-	Archer robot(0,0,0,0,1,0,300);
+	//Archer(float period, float track, float encoderScaleFactor);
 
-	vector<int> Mcommand;
-	Mcommand.push_back(-100);
-	Mcommand.push_back(100);
+	Archer robot(10, 2, 300);
 
-	robot.setActuators(Mcommand);
+	// vector<int> Mcommand;
+	// Mcommand.push_back(-100);
+	// Mcommand.push_back(100);
+
+	// robot.setActuators(Mcommand);
 
 
 

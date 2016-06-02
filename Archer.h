@@ -25,17 +25,20 @@
 #include "RoboteqDevice.h"
 #include "ErrorCodes.h"
 #include "Constants.h"
+#include <vector>
+#include <string>
+#include <cstring>
+
+ using namespace std;
 
 class Archer : public Robot
 {
 	protected:
 		RoboteqDevice device;
-		MOTORDATA *pMotorData;
-		int Lmotor;
-		int Rmotor;
+		int motor1;
+		int motor2;
 	public:
-		Archer(float period, float track, float encoderScaleFactor, float proportional_gain, 
-			float integral_gain, float differential_gain, float ppr);
+		Archer(float period, float track, float encoderScaleFactor);
 		virtual ~Archer();
 		virtual int readSensors();
 		virtual void setActuators(vector<int> MotorSpeed);

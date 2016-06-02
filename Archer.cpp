@@ -7,13 +7,16 @@
 
 using namespace std;
 
-Archer::Archer(float period, float track, float encoderScaleFactor, 
-	float proportional_gain, float integral_gain, float differential_gain, 
-	float ppr) : Robot(period, track, encoderScaleFactor)
+//period is how often to read sensors
+//distance/tick
+//multiply 2 or 4 by gear ratio for encoder scale factor
+//track=distance between two wheels
+
+Archer::Archer(float period, float track, float encoderScaleFactor) : Robot(period, track, encoderScaleFactor)
 {
 	//set motor left and right
-	Lmotor = 1;
-	Rmotor = 2;
+	motor1 = 1;
+	motor2 = 2;
 	//establish connection with SDC21XX
 	int status = device.Connect("/dev/ttyACM0");
 	if(status != RQ_SUCCESS)
@@ -22,8 +25,8 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 		return 1;
 	}
 	//set encoder from mot1 as feedback for channel1
-	cout<<"- SetConfig(_EMOD, Lmotor, 18)...";
-	if((status = device.SetConfig(_EMOD, Lmotor, 18)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_EMOD, motor1, 18)...";
+	if((status = device.SetConfig(_EMOD, motor1, 18)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -32,8 +35,8 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	sleepms(10);
 
 	//set encoder from mot2 as feedback for channel 2
-	cout<<"- SetConfig(_EMOD, Rmotor, 34)...";
-	if((status = device.SetConfig(_EMOD, Rmotor, 34)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_EMOD, motor2, 34)...";
+	if((status = device.SetConfig(_EMOD, motor2, 34)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -42,8 +45,8 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	sleepms(10);
 
 	//set encoder pulses per rotation from input
-	cout<<"- SetConfig(_EPPR, Lmotor, ppr)...";
-	if((status = device.SetConfig(_EPPR, Lmotor, ppr)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_EPPR, motor1, encoderScaleFactor)...";
+	if((status = device.SetConfig(_EPPR, motor1, encoderScaleFactor)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -51,8 +54,8 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	sleepms(10);
 
 	//set encoder from mot1 as feedback for channel1
-	cout<<"- SetConfig(_EPPR, Rmotor, ppr)...";
-	if((status = device.SetConfig(_EPPR, Rmotor, ppr)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_EPPR, motor2, encoderScaleFactor)...";
+	if((status = device.SetConfig(_EPPR, motor2, encoderScaleFactor)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -70,15 +73,15 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	4 : closed-loop position tracking 5 : torque
 	*/
 	//set channel 1 as closed loop speed mode
-	cout<<"- SetConfig(_MMOD, Lmotor, 1)...";
-	if((status = device.SetConfig(_MMOD, Lmotor, 1)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_MMOD, motor1, 1)...";
+	if((status = device.SetConfig(_MMOD, motor1, 1)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
 	//set channel 1 as closed loop speed mode
-	cout<<"- SetConfig(_MMOD, Rmotor, 1)...";
-	if((status = device.SetConfig(_MMOD, Rmotor, 1)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_MMOD, motor2, 1)...";
+	if((status = device.SetConfig(_MMOD, motor2, 1)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -91,14 +94,14 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	2 : 500ms at Error > 250 
 	3 : 1000ms at Error > 500
 	*/
-	cout<<"- SetConfig(_CLERD, Lmotor, 0)...";
-	if((status = device.SetConfig(_CLERD, Lmotor, 0)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_CLERD, motor1, 0)...";
+	if((status = device.SetConfig(_CLERD, motor1, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-	cout<<"- SetConfig(_CLERD, Rmotor, 0)...";
-	if((status = device.SetConfig(_CLERD, Rmotor, 0)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_CLERD, motor2, 0)...";
+	if((status = device.SetConfig(_CLERD, motor2, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -106,14 +109,14 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 
 
 	//set Differential Gain
-	cout<<"- SetConfig(_KD, Lmotor, dg)...";
-	if((status = device.SetConfig(_KD, Lmotor, differential_gain)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_KD, motor1, differential_gain)...";
+	if((status = device.SetConfig(_KD, motor1, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-	cout<<"- SetConfig(_KD, Rmotor, dg)...";
-	if((status = device.SetConfig(_KD, Rmotor, differential_gain)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_KD, motor2, differential_gain)...";
+	if((status = device.SetConfig(_KD, motor2, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -121,14 +124,14 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	sleepms(10);
 
 	//set integral Gain
-	cout<<"- SetConfig(_KI, Lmotor, integral_gain)...";
-	if((status = device.SetConfig(_KI, Lmotor, integral_gain)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_KI, motor1, integral_gain)...";
+	if((status = device.SetConfig(_KI, motor1, 1)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-	cout<<"- SetConfig(_KI, Rmotor, integral_gain)...";
-	if((status = device.SetConfig(_KI, Rmotor, integral_gain)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_KI, motor2, integral_gain)...";
+	if((status = device.SetConfig(_KI, motor2, 1)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -136,14 +139,14 @@ Archer::Archer(float period, float track, float encoderScaleFactor,
 	sleepms(10);
 
 	//set proportional gain
-	cout<<"- SetConfig(_KP, Lmotor, proportional_gain)...";
-	if((status = device.SetConfig(_KI, Lmotor, proportional_gain)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_KP, motor1, proportional_gain)...";
+	if((status = device.SetConfig(_KI, motor1, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-	cout<<"- SetConfig(_KP, Rmotor, proportional_gain)...";
-	if((status = device.SetConfig(_KI, Rmotor, proportional_gain)) != RQ_SUCCESS)
+	cout<<"- SetConfig(_KP, motor2, proportional_gain)...";
+	if((status = device.SetConfig(_KI, motor2, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -162,53 +165,53 @@ what array of chars and not ints?
 */
 	//SetCommand(int commandItem, int index, int value)
 	//assuming pmotorSpeed is an array of size two
-	//first value is speed of Lmotor
-	//second value is speed of Rmotor
+	//first value is speed of motor1
+	//second value is speed of motor2
 
 	int status;
-	if((status = device.SetCommand(_S, Lmotor, MotorSpeed[0])) != RQ_SUCCESS)
+	if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
-	sleepms(10);
-	if((status = device.SetCommand(_S, Rmotor, MotorSpeed[1]) != RQ_SUCCESS)
+	if((status = device.SetCommand(_S, motor2, MotorSpeed[1]) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
-	sleepms(100);
 }
 
 void Archer::setActuators(float speed, float rate)
 {
-/* Question
-what is rate in this case? ... units
-*/
-	//convert speed into RPM
-	//assuming 4 rotations = 1m
-	//m/s * rot/m * s/minute = rot/minute
-	float rpm = speed * 4 * 60;
+	int counts_sec_aux[2];
+	speedRate2Counts(speed, rate, counts_sec_aux)
 
-	vector<int> MotorSpeed(2, rpm);
+	std::vector<int> counts_sec;
+	counts_sec.push_back(counts_sec_aux[0]);
+	counts_sec.push_back(counts_sec_aux[1]);	
+
+	// Make sure that if not zero, it sets some speed
+	if(!counts_sec[0] && counts_sec_aux[0]) counts_sec[0] = (counts_sec_aux[0] > 0) ? 1 : -1;
+	if(!counts_sec[1] && counts_sec_aux[1]) counts_sec[1] = (counts_sec_aux[1] > 0) ? 1 : -1;
 
 	//Send motor commands
-	setActuators(MotorSpeed);
-	cout << "Archer SPEED RATE: " << speed << " " << math_functions::rad2deg(rate) << endl;
+	setActuators(counts_sec);
+	cout << "EV3 SPEED RATE: " << speed << " " << math_functions::rad2deg(rate) << endl;
 }
+
+//no sleep time in code
 
 int Archer::readSensors()
 {
 	// Get robot displacement from encoders
 	float rel_count_left;
 	float rel_count_right;
-	cout<<"- GetValue(_CR, Lmotor, rel_count_left)...";
-	if((status = device.GetValue(_CR, Lmotor, rel_count_left)) != RQ_SUCCESS)
+	cout<<"- GetValue(_CR, motor1, rel_count_left)...";
+	if((status = device.GetValue(_CR, motor1, rel_count_left)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"returned --> "<<result<<endl;
 	//Wait 10 ms before sending another command to device
-	sleepms(10);
-	cout<<"- GetValue(_CR, Rmotor, rel_count_right)...";
-	if((status = device.GetValue(_CR, Rmotor, rel_count_right)) != RQ_SUCCESS)
+	cout<<"- GetValue(_CR, motor2, rel_count_right)...";
+	if((status = device.GetValue(_CR, motor2, rel_count_right)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"returned --> "<<result<<endl;
