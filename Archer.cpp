@@ -12,7 +12,14 @@ using namespace std;
 //multiply 2 or 4 by gear ratio for encoder scale factor
 //track=distance between two wheels
 
-Archer::Archer(float period, float track, float encoderScaleFactor) : Robot(period, track, encoderScaleFactor)
+Archer::Archer() 
+	:Robot(10, 2, 300)
+{
+	cout << "hola" << endl;
+}
+
+Archer::Archer(float period, float track, float encoderScaleFactor) 
+	:Robot(period, track, encoderScaleFactor)
 {
 	//set motor left and right
 	motor1 = 1;
