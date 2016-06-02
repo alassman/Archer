@@ -162,6 +162,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 }
 
 Archer::~Archer() {
+	cout << "adios!" << endl;
 	device.Disconnect();
 }
 void Archer::setActuators(vector<int> MotorSpeed) {
