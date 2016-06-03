@@ -16,7 +16,12 @@ int main() {
 	Mcommand.push_back(-100);
 	Mcommand.push_back(100);
 
-	robot.setActuators(Mcommand);
+
+	for (int i = 0; i < 100; ++i)
+	{
+		robot.setActuators(Mcommand);
+
+	}
 
 	return 0;
 }

@@ -19,7 +19,6 @@ using namespace std;
 Archer::Archer(float period, float track, float encoderScaleFactor) 
 	:Robot(period, track, encoderScaleFactor)
 {
-	cout << "hi" << endl;
 	//set motor left and right
 	motor1 = 1;
 	motor2 = 2;

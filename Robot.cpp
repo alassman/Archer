@@ -43,10 +43,10 @@ Robot::Robot(float period, float track, float encoderScaleFactor)
 	//Initialize timing variables
 	mWaitForPeriod = true;
 	mCounter = 1;
-	gettimeofday(&mStartTimeSec, 0);
-	cout << "passed gettimeofday()" << endl;
-	cout << "checking timing()" << endl;
-	checkTimming(); //Initialize static current_time variables
+	// gettimeofday(&mStartTimeSec, 0);
+	// cout << "passed gettimeofday()" << endl;
+	// cout << "checking timing()" << endl;
+	// checkTimming(); //Initialize static current_time variables
 
 	cout << "Robot ready!\n";
 }
