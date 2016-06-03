@@ -279,11 +279,8 @@ int Archer::read_encoders() {
 		cout <<"motor1 encoder reading failed with exit status: " << status << endl;
 		exit(1);
 	}
-	if((status = device.GetValue(_CR, motor2, rel_count_2)) != RQ_SUCCESS) {
-		cout <<"motor2 encoder reading failed with exit status: " << status << endl;
-		exit(1);
-	}
+	
 
-	return (rel_count_1+rel_count_2) / 2;
+	return rel_count_1;
 }
 
