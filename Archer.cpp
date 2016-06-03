@@ -250,6 +250,12 @@ int Archer::readSensors()
 	
 	//Compute robot average displacement and rotation
 	mDisplacement = (mDisplacementLeft + mDisplacementRight) / 2.0;
+
+
+	cout << "mDisplacement: " << mDisplacement << endl;
+
+
+
 /* question
 what is mTrack?
 */
