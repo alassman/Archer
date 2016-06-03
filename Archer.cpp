@@ -125,6 +125,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 		cout<<"succeeded."<<endl;
 	sleepms(10);
 */
+/*
 
 	//set Differential Gain
 	cout<<"- SetConfig(_KD, motor1, differential_gain)...";
@@ -168,6 +169,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
+	*/
 
 	cout << "Archer Robot ready!\n";
 }
