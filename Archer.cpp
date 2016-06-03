@@ -240,6 +240,12 @@ int Archer::readSensors()
 
 	//Compute wheel linear displacements
 	mDisplacementLeft = (rel_count_1/mEncoderScaleFactor) * wheel_circumference;
+
+
+	cout << "rel_count_1/mEncoderScaleFactor: " << rel_count_1/mEncoderScaleFactor << endl; 
+
+
+
 	mDisplacementRight = (rel_count_2/mEncoderScaleFactor) * wheel_circumference;
 	
 	//Compute robot average displacement and rotation
