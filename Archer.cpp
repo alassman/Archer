@@ -241,8 +241,6 @@ int Archer::readSensors()
 	//Compute wheel linear displacements
 	mDisplacementLeft = (rel_count_1/mEncoderScaleFactor) * wheel_circumference;
 	mDisplacementRight = (rel_count_2/mEncoderScaleFactor) * wheel_circumference;
-
-	cout << "linear displacement of wheel1: " << mDisplacementLeft << endl;
 	
 	//Compute robot average displacement and rotation
 	mDisplacement = (mDisplacementLeft + mDisplacementRight) / 2.0;
@@ -256,5 +254,6 @@ what is mPeriod?
 */
 	
 	//cout << "Archer ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << (mRotation*180)/M_PI << endl;
-	return DATA_READY;
+	//return DATA_READY;
+	return mDisplacement;
 }

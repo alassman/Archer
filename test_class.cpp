@@ -20,20 +20,23 @@ int main() {
 	Archer robot(10, 14, 284);
 	vector<int> Mcommand(2,0);
 	Mcommand[0] = 100;
+	Mcommand[1] = 100;
+
+	float total_disp = 0;
 
 
 	for (int i = 0; i < 100; ++i)
 	{
 		robot.setActuators(Mcommand);
-		robot.readSensors();
+		total_disp += robot.readSensors();
 	}
 	for (int i = 0; i < 100; ++i)
 	{
-		robot.readSensors();
+		total_disp += robot.readSensors();
 	}
 
 
-
+	cout << "total displacement: " << total_disp << endl;
 
 
 	return 0;
