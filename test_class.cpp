@@ -23,5 +23,10 @@ int main() {
 
 	}
 
+	robot.readSensors();
+	
+
+
+
 	return 0;
 }
