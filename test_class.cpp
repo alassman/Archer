@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
+#include <thread>         // std::this_thread::sleep_for
+#include <chrono> 
 
 #include "Archer.h"
 
@@ -23,7 +25,7 @@ int main() {
 	robot.read_encoders();
 	cout << robot.read_encoders() << endl;
 
-	sleep(10);
+	std::this_thread::sleep_for (std::chrono::seconds(5));
 
 	cout << robot.read_encoders() << endl;
 
