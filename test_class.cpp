@@ -23,9 +23,7 @@ int main() {
 	robot.read_encoders();
 	cout << robot.read_encoders() << endl;
 
-	for(int i = 0; i < 500; ++i) {
-		cout << i << endl;
-	}
+	sleepms(6000);
 
 	cout << robot.read_encoders() << endl;
 
