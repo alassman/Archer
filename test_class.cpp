@@ -18,9 +18,8 @@ int main() {
 	period = 10hz
 */
 	Archer robot(10, 14, 284);
-	vector<int> Mcommand;
-	Mcommand.push_back(-100);
-	Mcommand.push_back(100);
+	vector<int> Mcommand(2,0);
+	Mcommand[0] = 100;
 
 
 	for (int i = 0; i < 100; ++i)
@@ -28,7 +27,7 @@ int main() {
 		robot.setActuators(Mcommand);
 		robot.readSensors();
 	}
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 100; ++i)
 	{
 		robot.readSensors();
 	}
