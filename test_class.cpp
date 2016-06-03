@@ -25,7 +25,7 @@ int main() {
 	float total_disp = 0;
 
 
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 40; ++i)
 	{
 		robot.setActuators(Mcommand);
 		total_disp += robot.readSensors();
