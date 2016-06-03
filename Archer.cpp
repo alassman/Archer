@@ -191,11 +191,11 @@ what array of chars and not ints?
 	int status;
 	if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS) {
 		cout<<"motor1 speed_set failed with exit status: " << status;
-		return 1;
+		exit(1);
 	}
 	if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS) {
 		cout<<"motor2 speed_set failed with exit status: " << status;
-		return 1;
+		exit(1);
 	}
 }
 
@@ -228,11 +228,11 @@ int Archer::readSensors()
 
 	if((status = device.GetValue(_CR, motor1, rel_count_left)) != RQ_SUCCESS) {
 		cout <<"motor1 encoder reading failed with exit status: " << status << endl;
-		return 1;
+		exit(1);
 	}
 	if((status = device.GetValue(_CR, motor2, rel_count_right)) != RQ_SUCCESS) {
 		cout <<"motor2 encoder reading failed with exit status: " << statsus << endl;
-		return 1;
+		exit(1);
 	}
 
 	//Compute wheel linear displacements
