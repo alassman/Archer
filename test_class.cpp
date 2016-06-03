@@ -27,8 +27,10 @@ int main() {
 	{
 		robot.setActuators(Mcommand);
 		robot.readSensors();
-
-
+	}
+	for (int i = 0; i < 50; ++i)
+	{
+		robot.readSensors();
 	}
 
 

@@ -189,14 +189,14 @@ what array of chars and not ints?
 	//second value is speed of motor2
 
 	int status;
-	if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
+	if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS) {
+		cout<<"motor1 speed_set failed with exit status: " << status;
+		return 1;
+	}
+	if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS) {
+		cout<<"motor2 speed_set failed with exit status: " << status;
+		return 1;
+	}
 }
 
 void Archer::setActuators(float speed, float rate)
@@ -218,24 +218,22 @@ void Archer::setActuators(float speed, float rate)
 }
 
 //no sleep time in code
-
+//reduciton ratio 1:71
 int Archer::readSensors()
 {
 	// Get robot displacement from encoders
 	int rel_count_left;
 	int rel_count_right;
 	int status;
-	cout<<"- GetValue(_CR, motor1, rel_count_left)...";
-	if((status = device.GetValue(_CR, motor1, rel_count_left)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"returned --> "<< rel_count_left <<endl;
-	//Wait 10 ms before sending another command to device
-	cout<<"- GetValue(_CR, motor2, rel_count_right)...";
-	if((status = device.GetValue(_CR, motor2, rel_count_right)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"returned --> "<< rel_count_right <<endl;
+
+	if((status = device.GetValue(_CR, motor1, rel_count_left)) != RQ_SUCCESS) {
+		cout <<"motor1 encoder reading failed with exit status: " << status << endl;
+		return 1;
+	}
+	if((status = device.GetValue(_CR, motor2, rel_count_right)) != RQ_SUCCESS) {
+		cout <<"motor2 encoder reading failed with exit status: " << statsus << endl;
+		return 1;
+	}
 
 	//Compute wheel linear displacements
 	mDisplacementLeft = (rel_count_left) * mEncoderScaleFactor;
