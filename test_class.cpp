@@ -21,10 +21,13 @@ int main() {
 
 
 	robot.read_encoders();
+	cout << robot.read_encoders() << endl;
 
 	for(int i = 0; i < 500; ++i) {
-		cout << robot.read_encoders() << endl;
+		cout << i << endl;
 	}
+
+	cout << robot.read_encoders() << endl;
 
 
 
