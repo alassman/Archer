@@ -24,7 +24,7 @@ int main() {
 	robot.read_encoders();
 	cout << robot.read_encoders() << endl;
 
-	sleepms(pow(2,25));
+	sleepms(pow(2,29));
 
 	cout << robot.read_encoders() << endl;
 
