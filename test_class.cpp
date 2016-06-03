@@ -20,11 +20,12 @@ int main() {
 	for (int i = 0; i < 100; ++i)
 	{
 		robot.setActuators(Mcommand);
+			robot.readSensors();
+
 
 	}
 
-	robot.readSensors();
-	
+
 
 
 
