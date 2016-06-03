@@ -232,7 +232,7 @@ int Archer::readSensors()
 		exit(1);
 	}
 	if((status = device.GetValue(_CR, motor2, rel_count_right)) != RQ_SUCCESS) {
-		cout <<"motor2 encoder reading failed with exit status: " << statsus << endl;
+		cout <<"motor2 encoder reading failed with exit status: " << status << endl;
 		exit(1);
 	}
 
