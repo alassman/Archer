@@ -36,7 +36,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 			break;
 	}
 
-	wheel_circumference = 50.265;
+	wheel_circumference = 47.878;
 
 
 
