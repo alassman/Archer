@@ -17,7 +17,7 @@ int main() {
 		4*71 = 284
 	period = 10hz
 */
-	Archer robot(10, 14, 142);
+	Archer robot(10, 14, 248);
 	vector<int> Mcommand(2,0);
 	Mcommand[0] = 100;
 	Mcommand[1] = 100;
@@ -34,7 +34,7 @@ int main() {
 	Mcommand[0] = 0;
 	Mcommand[1] = 0;
 
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 150; ++i)
 	{
 		robot.setActuators(Mcommand);
 		total_disp += robot.readSensors();
