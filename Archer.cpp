@@ -1,9 +1,13 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
+#include <math.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <cassert>
 #include "Archer.h"
+
+#define _USE_MATH_DEFINES
 
 using namespace std;
 
@@ -15,6 +19,7 @@ using namespace std;
 Archer::Archer(float period, float track, float encoderScaleFactor) 
 	:Robot(period, track, encoderScaleFactor)
 {
+	cout << "hi" << endl;
 	//set motor left and right
 	motor1 = 1;
 	motor2 = 2;
@@ -23,7 +28,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	if(status != RQ_SUCCESS)
 	{
 		cout<<"Error connecting to device: "<<status<<"."<<endl;
-		return 1;
+		cout << "**************" << endl;
 	}
 	//set encoder from mot1 as feedback for channel1
 	cout<<"- SetConfig(_EMOD, motor1, 18)...";
@@ -174,7 +179,7 @@ what array of chars and not ints?
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
-	if((status = device.SetCommand(_S, motor2, MotorSpeed[1]) != RQ_SUCCESS)
+	if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
 		cout<<"succeeded."<<endl;
@@ -183,7 +188,7 @@ what array of chars and not ints?
 void Archer::setActuators(float speed, float rate)
 {
 	int counts_sec_aux[2];
-	speedRate2Counts(speed, rate, counts_sec_aux)
+	speedRate2Counts(speed, rate, counts_sec_aux);
 
 	std::vector<int> counts_sec;
 	counts_sec.push_back(counts_sec_aux[0]);
@@ -195,7 +200,7 @@ void Archer::setActuators(float speed, float rate)
 
 	//Send motor commands
 	setActuators(counts_sec);
-	cout << "EV3 SPEED RATE: " << speed << " " << math_functions::rad2deg(rate) << endl;
+	cout << "EV3 SPEED RATE: " << speed << " " << rate*180/M_PI << endl;
 }
 
 //no sleep time in code
@@ -203,19 +208,20 @@ void Archer::setActuators(float speed, float rate)
 int Archer::readSensors()
 {
 	// Get robot displacement from encoders
-	float rel_count_left;
-	float rel_count_right;
+	int rel_count_left;
+	int rel_count_right;
+	int status;
 	cout<<"- GetValue(_CR, motor1, rel_count_left)...";
 	if((status = device.GetValue(_CR, motor1, rel_count_left)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
-		cout<<"returned --> "<<result<<endl;
+		cout<<"returned --> "<< rel_count_left <<endl;
 	//Wait 10 ms before sending another command to device
 	cout<<"- GetValue(_CR, motor2, rel_count_right)...";
 	if((status = device.GetValue(_CR, motor2, rel_count_right)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
 	else
-		cout<<"returned --> "<<result<<endl;
+		cout<<"returned --> "<< rel_count_right <<endl;
 
 	//Compute wheel linear displacements
 	mDisplacementLeft = (rel_count_left) * mEncoderScaleFactor;
@@ -228,13 +234,10 @@ what is mTrack?
 */
 	mRotation = (mDisplacementRight - mDisplacementLeft) / mTrack;
 
-	//Store last encoder state
-	mLastLeftEncoderCount = new_count_left;
-	mLastRightEncoderCount = new_count_right;
 /* Question
 what is mPeriod?
 */
 	
-	cout << "Archer ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << math_functions::rad2deg(mRotation) << endl;
+	cout << "Archer ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << (mRotation*180)/M_PI << endl;
 	return DATA_READY;
 }

@@ -20,29 +20,32 @@
 
 #include <iostream>
 #include <cmath>
+#include <math.h>
 #include <sys/time.h>
 #include "Robot.h"
-#include "MathFunctions.h"
+#define _USE_MATH_DEFINES
 
 const int MAX_ENCODER_CONT_SEC = 1000000; //The default limit used for the LEGO EV3 should be very large (infinite), this is only needed for high count encoders
 using namespace std;
 
-Robot::Robot(float period, float track, float encoderScaleFactor, char *pMotorInfo, char *sensorInfo)
+Robot::Robot(float period, float track, float encoderScaleFactor)
 {
+	cout << "in Robot.h" << endl;
 	//This constructor does not do anything with the motor and sensor information.
 	//That information is handled directly by each robot sub-class. This extra arguments are needed 
-	//to allow class virtualization.
-	
+	//to allow class virtualization.	
 	// Robot parameters
 	mPeriod = period;
 	mTrack = track;
 	mEncoderScaleFactor = encoderScaleFactor;
 	mEncoderCountSecLimit = MAX_ENCODER_CONT_SEC;
-	
+
 	//Initialize timing variables
 	mWaitForPeriod = true;
 	mCounter = 1;
 	gettimeofday(&mStartTimeSec, 0);
+	cout << "passed gettimeofday()" << endl;
+	cout << "checking timing()" << endl;
 	checkTimming(); //Initialize static current_time variables
 
 	cout << "Robot ready!\n";
@@ -112,7 +115,7 @@ void Robot::speedRate2Counts(float speed, float rate, int *pCountSec)
 		cout << " Aft: "<<pCountSec[0] << " " << pCountSec[1] << endl;
 	}
 
-	cout << "ROBOT: " << speed << " " << math_functions::rad2deg(rate) << " " << left_speed << "/" << (int)pCountSec[0] << " " << right_speed << "/" << (int)pCountSec[1] << endl;
+	cout << "ROBOT: " << speed << " " << rate*180/M_PI << " " << left_speed << "/" << (int)pCountSec[0] << " " << right_speed << "/" << (int)pCountSec[1] << endl;
 
 }
 	

@@ -1,10 +1,16 @@
 CC=g++ -g -Wall
 
 
-all: go
+all: test
 
-go: RoboteqDevice.o test_class.cpp
-	$(CC) RoboteqDevice.o test_class.cpp -o go
+test: Archer.o test_class.cpp
+	$(CC) Robot.o RoboteqDevice.o Archer.o test_class.cpp -o go
+
+Archer.o: Archer.cpp Archer.h Robot.o RoboteqDevice.o ErrorCodes.h Constants.h
+	$(CC) -c Archer.cpp
+
+Robot.o: Robot.cpp Robot.h
+	$(CC) -c Robot.cpp
 
 RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h
 	$(CC) -c RoboteqDevice.cpp
