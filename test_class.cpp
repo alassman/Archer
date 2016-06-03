@@ -30,8 +30,13 @@ int main() {
 		robot.setActuators(Mcommand);
 		total_disp += robot.readSensors();
 	}
+
+	Mcommand[0] = 0;
+	Mcommand[1] = 0;
+
 	for (int i = 0; i < 100; ++i)
 	{
+		robot.setActuators(Mcommand);
 		total_disp += robot.readSensors();
 	}
 
