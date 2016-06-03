@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <cmath>
+#include <unistd.h>
 #include <vector>
 
 #include "Archer.h"
@@ -24,7 +25,7 @@ int main() {
 	robot.read_encoders();
 	cout << robot.read_encoders() << endl;
 
-	sleepms(pow(2,31));
+	sleep(6);
 
 	cout << robot.read_encoders() << endl;
 
