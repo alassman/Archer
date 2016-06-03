@@ -19,7 +19,7 @@ int main() {
 		4*71 = 284
 	period = 10hz
 */
-	Archer robot(10, 14, 284);
+	Archer robot(10, 14, 1800);
 
 
 	robot.read_encoders();
