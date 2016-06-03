@@ -270,7 +270,7 @@ what is mPeriod?
 	return mDisplacement;
 }
 
-int read_encoders() {
+int Archer::read_encoders() {
 	int rel_count_1;
 	int rel_count_2;
 	int status;
