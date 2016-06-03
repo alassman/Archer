@@ -17,13 +17,13 @@ int main() {
 		4*71 = 284
 	period = 10hz
 */
-	Archer robot(10, 14, 248);
+	Archer robot(10, 14, 568);
 	vector<int> Mcommand(2,0);
 	Mcommand[0] = 100;
 	Mcommand[1] = 100;
 
 	float total_disp = 0;
-
+	robot.readSensors();
 
 	for (int i = 0; i < 40; ++i)
 	{
