@@ -24,11 +24,21 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	motor2 = 2;
 	//establish connection with SDC21XX
 	int status = device.Connect("/dev/ttyACM0");
-	if(status != RQ_SUCCESS)
-	{
-		cout<<"Error connecting to device: "<<status<<"."<<endl;
-		cout << "**************" << endl;
+	for(int i = 0; i < 3; ++i) {
+		if(status != RQ_SUCCESS)
+		{
+			cout<<"Error connecting to device: "<<status<<"."<<endl;
+			cout << "Trying again..." << endl;
+			status = device.Connect("/dev/ttyACM0");
+		}
+		else
+			break;
 	}
+
+
+
+/*
+
 	//set encoder from mot1 as feedback for channel1
 	cout<<"- SetConfig(_EMOD, motor1, 18)...";
 	if((status = device.SetConfig(_EMOD, motor1, 18)) != RQ_SUCCESS)
@@ -66,6 +76,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 		cout<<"succeeded."<<endl;
 
 		sleepms(10);
+*/
 
 	/*
 	CLOSED LOOP PARAMETERS
@@ -78,6 +89,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	4 : closed-loop position tracking 5 : torque
 	*/
 	//set channel 1 as closed loop speed mode
+/*	
 	cout<<"- SetConfig(_MMOD, motor1, 1)...";
 	if((status = device.SetConfig(_MMOD, motor1, 1)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
@@ -91,7 +103,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-
+*/
 	//set closed loop error detection
 	/*
 	0 : Detection disabled
@@ -99,6 +111,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	2 : 500ms at Error > 250 
 	3 : 1000ms at Error > 500
 	*/
+/*
 	cout<<"- SetConfig(_CLERD, motor1, 0)...";
 	if((status = device.SetConfig(_CLERD, motor1, 0)) != RQ_SUCCESS)
 		cout<<"failed --> "<<status<<endl;
@@ -111,7 +124,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	else
 		cout<<"succeeded."<<endl;
 	sleepms(10);
-
+*/
 
 	//set Differential Gain
 	cout<<"- SetConfig(_KD, motor1, differential_gain)...";
