@@ -242,7 +242,7 @@ int Archer::readSensors()
 	mDisplacementLeft = (rel_count_1/mEncoderScaleFactor) * wheel_circumference;
 
 
-	cout << "rel_count_1/mEncoderScaleFactor: " << rel_count_1/mEncoderScaleFactor << endl; 
+	cout << "(rel_count_1/mEncoderScaleFactor) * wheel_circumference: " << (rel_count_1/mEncoderScaleFactor) * wheel_circumference << endl; 
 
 
 
