@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
-#include <thread>         // std::this_thread::sleep_for
 
 #include "Archer.h"
 
@@ -24,7 +23,7 @@ int main() {
 	robot.read_encoders();
 	cout << robot.read_encoders() << endl;
 
-	std::this_thread::sleep_for (5);
+sleepms(999999);
 
 	cout << robot.read_encoders() << endl;
 
