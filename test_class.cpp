@@ -28,7 +28,7 @@ int main() {
 	for (int i = 0; i < 40; ++i)
 	{
 		robot.setActuators(Mcommand);
-		total_disp += robot.readSensors();
+		cout << total_disp += robot.readSensors() << endl;
 	}
 
 	Mcommand[0] = 0;
@@ -37,7 +37,7 @@ int main() {
 	for (int i = 0; i < 150; ++i)
 	{
 		robot.setActuators(Mcommand);
-		total_disp += robot.readSensors();
+		cout << total_disp += robot.readSensors() << endl;
 	}
 
 
