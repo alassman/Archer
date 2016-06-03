@@ -272,7 +272,6 @@ what is mPeriod?
 
 int Archer::read_encoders() {
 	int rel_count_1;
-	int rel_count_2;
 	int status;
 
 	if((status = device.GetValue(_CR, motor1, rel_count_1)) != RQ_SUCCESS) {
