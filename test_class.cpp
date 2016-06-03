@@ -20,10 +20,10 @@ int main() {
 	Archer robot(10, 14, 284);
 
 
-	read_encoders();
+	robot.read_encoders();
 
 	for(int i = 0; i < 500; ++i) {
-		cout << robot.readSensors() << endl;
+		cout << robot.read_encoders() << endl;
 	}
 
 
