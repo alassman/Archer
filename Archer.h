@@ -35,6 +35,7 @@ class Archer : public Robot
 {
 	protected:
 		RoboteqDevice device;
+		float wheel_circumference;
 		int motor1;
 		int motor2;
 	public:
