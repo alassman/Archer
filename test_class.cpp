@@ -20,7 +20,7 @@ int main() {
 	Archer robot(10, 14, 284);
 
 
-	read_encoders()
+	read_encoders();
 
 	for(int i = 0; i < 500; ++i) {
 		cout << robot.readSensors() << endl;
@@ -60,6 +60,6 @@ int main() {
 	cout << "total displacement: " << total_disp << endl;
 */
 
-	
+
 	return 0;
 }
