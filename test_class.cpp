@@ -18,6 +18,19 @@ int main() {
 	period = 10hz
 */
 	Archer robot(10, 14, 284);
+
+
+	read_encoders()
+
+	for(int i = 0; i < 500; ++i) {
+		cout << robot.readSensors() << endl;
+	}
+
+
+
+
+
+/*
 	vector<int> Mcommand(2,0);
 	Mcommand[0] = 100;
 	Mcommand[1] = 100;
@@ -45,7 +58,8 @@ int main() {
 
 
 	cout << "total displacement: " << total_disp << endl;
+*/
 
-
+	
 	return 0;
 }

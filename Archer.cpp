@@ -269,3 +269,21 @@ what is mPeriod?
 	//return DATA_READY;
 	return mDisplacement;
 }
+
+int read_encoders() {
+	int rel_count_1;
+	int rel_count_2;
+	int status;
+
+	if((status = device.GetValue(_CR, motor1, rel_count_1)) != RQ_SUCCESS) {
+		cout <<"motor1 encoder reading failed with exit status: " << status << endl;
+		exit(1);
+	}
+	if((status = device.GetValue(_CR, motor2, rel_count_2)) != RQ_SUCCESS) {
+		cout <<"motor2 encoder reading failed with exit status: " << status << endl;
+		exit(1);
+	}
+
+	return (rel_count_1+rel_count_2) / 2;
+}
+
