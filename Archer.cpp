@@ -264,56 +264,6 @@ void Archer::setActuators(float speed, float rate)
 	cout << "EV3 SPEED RATE: " << speed << " " << rate*180/M_PI << endl;
 }
 
-//no sleep time in code
-//reduciton ratio 1:71
-int Archer::readSensors()
-{
-	// Get robot displacement from encoders
-	int rel_count_1;
-	int rel_count_2;
-	int status;
-
-	if((status = device.GetValue(_CR, motor1, rel_count_1)) != RQ_SUCCESS) {
-		cout <<"motor1 encoder reading failed with exit status: " << status << endl;
-		exit(1);
-	}
-	if((status = device.GetValue(_CR, motor2, rel_count_2)) != RQ_SUCCESS) {
-		cout <<"motor2 encoder reading failed with exit status: " << status << endl;
-		exit(1);
-	}
-
-	//Compute wheel linear displacements
-	mDisplacementLeft = (rel_count_1/mEncoderScaleFactor) * wheel_circumference;
-
-
-	cout << "(rel_count_1/mEncoderScaleFactor) * wheel_circumference: " << (rel_count_1/mEncoderScaleFactor) * wheel_circumference << endl; 
-
-
-
-	mDisplacementRight = (rel_count_2/mEncoderScaleFactor) * wheel_circumference;
-	
-	//Compute robot average displacement and rotation
-	mDisplacement = (mDisplacementLeft + mDisplacementRight) / 2.0;
-
-
-	cout << "mDisplacement: " << mDisplacement << endl;
-
-
-
-/* question
-what is mTrack?
-*/
-	mRotation = (mDisplacementRight - mDisplacementLeft) / mTrack;
-
-/* Question
-what is mPeriod?
-*/
-	
-	//cout << "Archer ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << (mRotation*180)/M_PI << endl;
-	//return DATA_READY;
-	return mDisplacement;
-}
-
 int Archer::read_encoders() {
 	int rel_count_1;
 	int status;
