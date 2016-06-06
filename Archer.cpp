@@ -181,7 +181,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 Archer::~Archer() {
 	device.SetCommand(_EX);
 	vector<int> command(2,0);
-	device.setActuators(command);
+	setActuators(command);
 	device.SetCommand(_MG);
 	device.Disconnect();
 	cout << "Archer Robot Closed!\n";
@@ -225,7 +225,7 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 	//second value is speed of motor2
 	if(MotorSpeed[0] == 0 && MotorSpeed[1] == 0) {
 		device.SetCommand(_EX);
-		device.setActuators(MotorSpeed);
+		setActuators(MotorSpeed);
 		device.SetCommand(_MG);
 	}
 	else {
