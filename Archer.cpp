@@ -214,6 +214,20 @@ int Archer::readSensors()
 		exit(1);
 	}
 
+	//read RPM values
+	//Read RPM value
+	int result = -10;
+	if((status = device.GetValue(_S, motor1, result)) != RQ_SUCCESS)
+		cout<<"RPM 1 failed --> "<<status<<endl;
+	else
+		cout<<"motor 1 RPM "<<result<<endl;
+	if((status = device.GetValue(_S, motor2, result)) != RQ_SUCCESS)
+		cout<<"RPM 2 failed --> "<<status<<endl;
+	else
+		cout<<"motor 2 RPM "<<result<<endl;
+
+
+
 	//Compute wheel linear displacements
 	mDisplacementLeft = rel_count_1 * mEncoderScaleFactor;
 	mDisplacementRight = rel_count_2 * mEncoderScaleFactor;
@@ -222,6 +236,9 @@ int Archer::readSensors()
 	mDisplacement = (mDisplacementLeft + mDisplacementRight) / 2.0;
 	mRotation = (mDisplacementRight - mDisplacementLeft) / mTrack;
 	
+
+
+
 	cout << "ARCHER ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << math_functions::rad2deg(mRotation) << endl;
 	return DATA_READY;
 }
