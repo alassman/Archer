@@ -2,7 +2,7 @@ OBJS = Robot.o Archer.o RoboteqDevice.o MathFunctions.o
 CC = g++
 CFLAGS = -Wall -static
 TARGET = main
-FILENAME = test_command.cpp
+FILENAME = test_class.cpp
 
 all: $(TARGET)
 $(TARGET): $(OBJS) $(FILENAME)
