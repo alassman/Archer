@@ -22,14 +22,12 @@ int main() {
 	Archer robot(10, 14, 1800);
 
 	vector<int> Mcommand(2,0);
-	Mcommand[0] = 100;
-	Mcommand[1] = 100;
+	Mcommand[0] = 75;
+	Mcommand[1] = 75;
 
 	for (int i = 0; i < 40; ++i)
 	{
 		robot.setActuators(Mcommand);
-		robot.readSensors();
-		cout << total_disp << endl;
 	}
 
 
