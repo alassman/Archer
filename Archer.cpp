@@ -7,8 +7,7 @@
 #include <unistd.h>
 #include <cassert>
 #include "Archer.h"
-
-#define _USE_MATH_DEFINES
+#include "MathFunctions.h"
 
 using namespace std;
 
@@ -25,7 +24,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	motor2 = 2;
 	//establish connection with SDC21XX
 	int status = device.Connect("/dev/ttyACM0");
-	for(int i = 0; i < 3; ++i) {
+	for(int i = 0; i < 10; ++i) {
 		if(status != RQ_SUCCESS)
 		{
 			cout<<"Error connecting to device: "<<status<<"."<<endl;
@@ -36,7 +35,11 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 			break;
 	}
 
-	wheel_circumference = 47.878;
+	strcpy(mName, "Archer");
+	//to initialize encoder readings because each read is relative to the last read
+	readSensors();
+	cout << "Archer is ready!\n";
+	
 
 
 
@@ -173,33 +176,67 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	else
 		cout<<"succeeded."<<endl;
 	*/
-
-	cout << "Archer Robot ready!\n";
 }
 
 Archer::~Archer() {
+	device.SetCommand(_EX)
+	vector<int> command(2,0);
+	setActuators(command);
 	device.Disconnect();
+	cout << "Archer Robot Closed!"
 }
+
+//no sleep time in code
+//reduciton ratio 1:71
+int Archer::readSensors()
+{
+	// Get robot displacement from encoders
+	int rel_count_1;
+	int rel_count_2;
+	int status;
+
+	if((status = device.GetValue(_CR, motor1, rel_count_1)) != RQ_SUCCESS) {
+		cout <<"motor1 encoder reading failed with exit status: " << status << endl;
+		exit(1);
+	}
+	if((status = device.GetValue(_CR, motor2, rel_count_2)) != RQ_SUCCESS) {
+		cout <<"motor2 encoder reading failed with exit status: " << status << endl;
+		exit(1);
+	}
+
+	//Compute wheel linear displacements
+	mDisplacementLeft = rel_count_1 * mEncoderScaleFactor;
+	mDisplacementRight = rel_count_2 * mEncoderScaleFactor;
+	
+	//Compute robot average displacement and rotation
+	mDisplacement = (mDisplacementLeft + mDisplacementRight) / 2.0;
+	mRotation = (mDisplacementRight - mDisplacementLeft) / mTrack;
+	
+	cout << "EV3 ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << math_functions::rad2deg(mRotation) << endl;
+	return DATA_READY;
+}
+
 void Archer::setActuators(vector<int> MotorSpeed) {
 	assert(MotorSpeed.size() == 2 && "MotorSpeed vector malformed");
-/* Question
-is this the structure of the array you're looking for?
-what array of chars and not ints?
-*/
 	//SetCommand(int commandItem, int index, int value)
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of motor1
 	//second value is speed of motor2
 
 	int status;
+	//motor1 command
 	if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS) {
 		cout<<"motor1 speed_set failed with exit status: " << status;
 		exit(1);
 	}
+	//motor2 command
 	if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS) {
 		cout<<"motor2 speed_set failed with exit status: " << status;
 		exit(1);
 	}
+
+	cout << "ARCHER SET SPEED: " << MotorSpeed[0] << " " << MotorSpeed[1] << endl;
+	checkTimming();
 }
 
 void Archer::setActuators(float speed, float rate)

@@ -1,28 +1,19 @@
-CC=g++ -g -Wall
+OBJS = Robot.o Archer.o RoboteqDevice.o MathFunctions.o
+CC = arm-none-linux-gnueabi-g++
+CFLAGS = -Wall -static
+TARGET = main
+FILENAME = test_connection.cpp
 
-
-all: test
-
-test: Archer.o test_class.cpp
-	$(CC) Robot.o RoboteqDevice.o Archer.o test_class.cpp -o go
-
-Archer.o: Archer.cpp Archer.h Robot.o RoboteqDevice.o ErrorCodes.h Constants.h
-	$(CC) -c Archer.cpp
-
+all: $(TARGET)
+$(TARGET): $(OBJS) $(FILENAME)
+	$(CC) $(CFLAGS) $(OBJS) $(FILENAME) -o $@ 
 Robot.o: Robot.cpp Robot.h
-	$(CC) -c Robot.cpp
-
-RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h
-	$(CC) -c RoboteqDevice.cpp
-
-test_query: RoboteqDevice.o test_query.cpp
-	$(CC) RoboteqDevice.o test_query.cpp -o go
-
-test_command: RoboteqDevice.o test_command.cpp
-	$(CC) RoboteqDevice.o test_command.cpp -o go
-
-test_connection: RoboteqDevice.o test_connection.cpp
-	$(CC) RoboteqDevice.o test_connection.cpp -o go
-
+	$(CC) $(CFLAGS) -c Robot.cpp 
+Archer.o: Archer.cpp Archer.h Robot.o RoboteqDevice.o ErrorCodes.h Constants.h
+	$(CC) $(CFLAGS) -c Archer.cpp
+RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h ErrorCodes.h
+	$(CC) $(CFLAGS) -c RoboteqDevice.cpp
+MathFunctions.o: MathFunctions.cpp MathFunctions.h
+	$(CC) $(CFLAGS) -c MathFunctions.cpp
 clean:
-	rm *.o go
+	\rm *.o $(TARGET) 
