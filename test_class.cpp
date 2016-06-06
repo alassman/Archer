@@ -25,7 +25,7 @@ int main() {
 	Mcommand[0] = 75;
 	Mcommand[1] = 75;
 
-	for (int i = 0; i < 40; ++i)
+	for (int i = 0; i < 100; ++i)
 	{
 		robot.setActuators(Mcommand);
 		robot.readSensors();
