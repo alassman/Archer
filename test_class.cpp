@@ -19,7 +19,7 @@ int main() {
 		4*71 = 284
 	period = 10hz
 */
-	Archer robot(10, 14, 1800);
+	Archer robot(0.1, 14, 1800);
 
 	vector<int> Mcommand(2,0);
 	Mcommand[0] = 75;
