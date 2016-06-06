@@ -28,6 +28,7 @@ int main() {
 	for (int i = 0; i < 40; ++i)
 	{
 		robot.setActuators(Mcommand);
+		robot.readSensors();
 	}
 
 	cout << "done" << endl;

@@ -180,7 +180,6 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 
 Archer::~Archer() {
 	device.SetCommand(_EX);
-	cout << "emergency stop" << endl;
 	int status;
 	//motor1 command
 	if((status = device.SetCommand(_S, motor1, 0)) != RQ_SUCCESS) {
@@ -192,9 +191,7 @@ Archer::~Archer() {
 		cout<<"motor2 speed_set failed with exit status: " << status;
 		exit(1);
 	}
-	cout << "set motors to speed 0" << endl;
 	device.SetCommand(_MG);
-	cout << "exit \"emergency stop\" mode" << endl;
 	device.Disconnect();
 	cout << "Archer Robot Closed!\n";
 }
@@ -225,7 +222,7 @@ int Archer::readSensors()
 	mDisplacement = (mDisplacementLeft + mDisplacementRight) / 2.0;
 	mRotation = (mDisplacementRight - mDisplacementLeft) / mTrack;
 	
-	cout << "EV3 ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << math_functions::rad2deg(mRotation) << endl;
+	cout << "ARCHER ACTUAL SPEED: " << " " << mDisplacementLeft/mEncoderScaleFactor/mPeriod << " " << mDisplacementRight/mEncoderScaleFactor/mPeriod << " " << mDisplacement << " " << math_functions::rad2deg(mRotation) << endl;
 	return DATA_READY;
 }
 
