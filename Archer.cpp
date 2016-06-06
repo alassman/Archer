@@ -180,6 +180,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 
 Archer::~Archer() {
 	device.SetCommand(_EX);
+	sleepms(10);
 	int status;
 	//motor1 command
 	if((status = device.SetCommand(_S, motor1, 0)) != RQ_SUCCESS) {
@@ -191,7 +192,9 @@ Archer::~Archer() {
 		cout<<"motor2 speed_set failed with exit status: " << status;
 		exit(1);
 	}
+	sleepms(10);
 	device.SetCommand(_MG);
+	sleepms(10);
 	device.Disconnect();
 	cout << "Archer Robot Closed!\n";
 }

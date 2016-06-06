@@ -22,7 +22,7 @@ int main() {
 	Archer robot(0.1, 14, 1800);
 
 	vector<int> Mcommand(2,0);
-	Mcommand[0] = 80;
+	Mcommand[0] = 10;
 	Mcommand[1] = 80;
 
 	for (int i = 0; i < 100; ++i)
