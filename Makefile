@@ -1,5 +1,5 @@
 OBJS = Robot.o Archer.o RoboteqDevice.o MathFunctions.o
-CC = arm-none-linux-gnueabi-g++
+CC = g++
 CFLAGS = -Wall -static
 TARGET = main
 FILENAME = test_connection.cpp

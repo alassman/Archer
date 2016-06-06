@@ -179,11 +179,12 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 }
 
 Archer::~Archer() {
-	device.SetCommand(_EX)
+	device.SetCommand(_EX);
 	vector<int> command(2,0);
-	setActuators(command);
+	device.setActuators(command);
+	device.SetCommand(_MG);
 	device.Disconnect();
-	cout << "Archer Robot Closed!"
+	cout << "Archer Robot Closed!\n";
 }
 
 //no sleep time in code
@@ -222,20 +223,26 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of motor1
 	//second value is speed of motor2
-
-	int status;
-	//motor1 command
-	if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS) {
-		cout<<"motor1 speed_set failed with exit status: " << status;
-		exit(1);
+	if(MotorSpeed[0] == 0 && MotorSpeed[1] == 0) {
+		device.SetCommand(_EX);
+		device.setActuators(MotorSpeed);
+		device.SetCommand(_MG);
 	}
-	//motor2 command
-	if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS) {
-		cout<<"motor2 speed_set failed with exit status: " << status;
-		exit(1);
-	}
+	else {
+		int status;
+		//motor1 command
+		if((status = device.SetCommand(_S, motor1, MotorSpeed[0])) != RQ_SUCCESS) {
+			cout<<"motor1 speed_set failed with exit status: " << status;
+			exit(1);
+		}
+		//motor2 command
+		if((status = device.SetCommand(_S, motor2, MotorSpeed[1])) != RQ_SUCCESS) {
+			cout<<"motor2 speed_set failed with exit status: " << status;
+			exit(1);
+		}
 
-	cout << "ARCHER SET SPEED: " << MotorSpeed[0] << " " << MotorSpeed[1] << endl;
+		cout << "ARCHER SET SPEED: " << MotorSpeed[0] << " " << MotorSpeed[1] << endl;
+	}
 	checkTimming();
 }
 
