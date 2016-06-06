@@ -180,9 +180,12 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 
 Archer::~Archer() {
 	device.SetCommand(_EX);
+	cout << "emergency stop" << endl;
 	vector<int> command(2,0);
 	setActuators(command);
+	cout << "set motors to speed 0" << endl;
 	device.SetCommand(_MG);
+	cout << "exit \"emergency stop\" mode" << endl;
 	device.Disconnect();
 	cout << "Archer Robot Closed!\n";
 }
