@@ -30,6 +30,8 @@ int main() {
 		robot.setActuators(Mcommand);
 	}
 
+	cout << "done" << endl;
+
 
 
 
