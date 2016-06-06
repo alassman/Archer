@@ -181,8 +181,17 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 Archer::~Archer() {
 	device.SetCommand(_EX);
 	cout << "emergency stop" << endl;
-	vector<int> command(2,0);
-	setActuators(command);
+	int status;
+	//motor1 command
+	if((status = device.SetCommand(_S, motor1, 0)) != RQ_SUCCESS) {
+		cout<<"motor1 speed_set failed with exit status: " << status;
+		exit(1);
+	}
+	//motor2 command
+	if((status = device.SetCommand(_S, motor2, 0)) != RQ_SUCCESS) {
+		cout<<"motor2 speed_set failed with exit status: " << status;
+		exit(1);
+	}
 	cout << "set motors to speed 0" << endl;
 	device.SetCommand(_MG);
 	cout << "exit \"emergency stop\" mode" << endl;
