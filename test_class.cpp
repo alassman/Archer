@@ -38,7 +38,7 @@ int main()
 	robot.setActuators(command);
 	cout << "enter desired speed: ";
 	int left_motor, right_motor;
-	cin << left_motor << right_motor;
+	cin >> left_motor << right_motor;
 	command[0] = left_motor;
 	command[1] = right_motor;
 	for (int i = 0; i < 50; ++i)
