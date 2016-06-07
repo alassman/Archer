@@ -2,6 +2,8 @@
 #include "MathFunctions.h"
 #include <vector>
 
+using namespace std;
+
 //Platform measurements
 const float TRACK = 110.0; // [mm]
 const int COUNTS_REVOLUTION = 2000; // [count/rev]

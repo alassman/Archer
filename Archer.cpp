@@ -19,10 +19,8 @@ using namespace std;
 Archer::Archer(float period, float track, float encoderScaleFactor) 
 	:Robot(period, track, encoderScaleFactor)
 {
-	SPEED_FACTOR = 1.885; // [rpm]
-	MAX_ACTUAL_SPEED = 40; // [rot/min]
 	MAX_COMMAND_SPEED = 75; // [rot/min]
-	counts_revolution = 2000; // [counts/rev]
+	counts_revolution = 568; // [counts/rev]
 
 	//set motor left_motor and right_motor
 	left_motor = 1;
@@ -47,143 +45,6 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	//to initialize encoder readings because each read is relative to the last read
 	readSensors();
 	cout << "Archer is ready!\n";
-	
-
-
-
-/*
-
-	//set encoder from mot1 as feedback for channel1
-	cout<<"- SetConfig(_EMOD, left_motor, 18)...";
-	if((status = device.SetConfig(_EMOD, left_motor, 18)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-
-	//Wait 10 ms before sending another command to device
-	sleepms(10);
-
-	//set encoder from mot2 as feedback for channel 2
-	cout<<"- SetConfig(_EMOD, right_motor, 34)...";
-	if((status = device.SetConfig(_EMOD, right_motor, 34)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-
-	//Wait 10 ms before sending another command to device
-	sleepms(10);
-
-	//set encoder pulses per rotation from input
-	cout<<"- SetConfig(_EPPR, left_motor, encoderScaleFactor)...";
-	if((status = device.SetConfig(_EPPR, left_motor, encoderScaleFactor)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-
-	sleepms(10);
-
-	//set encoder from mot1 as feedback for channel1
-	cout<<"- SetConfig(_EPPR, right_motor, encoderScaleFactor)...";
-	if((status = device.SetConfig(_EPPR, right_motor, encoderScaleFactor)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-
-		sleepms(10);
-*/
-
-	/*
-	CLOSED LOOP PARAMETERS
-	*/
-		//set operating mode for channel
-	/*
-	0 : open-loop speed
-	1 : closed-loop speed
-	2 : closed-loop position relative 3 : closed-loop count position
-	4 : closed-loop position tracking 5 : torque
-	*/
-	//set channel 1 as closed loop speed mode
-/*	
-	cout<<"- SetConfig(_MMOD, left_motor, 1)...";
-	if((status = device.SetConfig(_MMOD, left_motor, 1)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-	//set channel 1 as closed loop speed mode
-	cout<<"- SetConfig(_MMOD, right_motor, 1)...";
-	if((status = device.SetConfig(_MMOD, right_motor, 1)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-*/
-	//set closed loop error detection
-	/*
-	0 : Detection disabled
-	1 : 250ms at Error > 100 
-	2 : 500ms at Error > 250 
-	3 : 1000ms at Error > 500
-	*/
-/*
-	cout<<"- SetConfig(_CLERD, left_motor, 0)...";
-	if((status = device.SetConfig(_CLERD, left_motor, 0)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-	cout<<"- SetConfig(_CLERD, right_motor, 0)...";
-	if((status = device.SetConfig(_CLERD, right_motor, 0)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-*/
-/*
-
-	//set Differential Gain
-	cout<<"- SetConfig(_KD, left_motor, differential_gain)...";
-	if((status = device.SetConfig(_KD, left_motor, 0)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-	cout<<"- SetConfig(_KD, right_motor, differential_gain)...";
-	if((status = device.SetConfig(_KD, right_motor, 0)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-
-	sleepms(10);
-
-	//set integral Gain
-	cout<<"- SetConfig(_KI, left_motor, integral_gain)...";
-	if((status = device.SetConfig(_KI, left_motor, 1)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-	cout<<"- SetConfig(_KI, right_motor, integral_gain)...";
-	if((status = device.SetConfig(_KI, right_motor, 1)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-
-	sleepms(10);
-
-	//set proportional gain
-	cout<<"- SetConfig(_KP, left_motor, proportional_gain)...";
-	if((status = device.SetConfig(_KI, left_motor, 0)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	sleepms(10);
-	cout<<"- SetConfig(_KP, right_motor, proportional_gain)...";
-	if((status = device.SetConfig(_KI, right_motor, 0)) != RQ_SUCCESS)
-		cout<<"failed --> "<<status<<endl;
-	else
-		cout<<"succeeded."<<endl;
-	*/
 }
 
 Archer::~Archer() {
@@ -260,14 +121,6 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of left_motor
 	//second value is speed of right_motor
-
-	MotorSpeed[LEFT] *= SPEED_FACTOR;
-	MotorSpeed[RIGHT] *= SPEED_FACTOR;
-
-	if(MotorSpeed[LEFT] > MAX_COMMAND_SPEED || MotorSpeed[RIGHT] > MAX_COMMAND_SPEED) {
-		MotorSpeed[LEFT] = MAX_COMMAND_SPEED;
-		MotorSpeed[RIGHT] = MAX_COMMAND_SPEED;
-	}
 
 
 	if(MotorSpeed[LEFT] == 0 && MotorSpeed[RIGHT] == 0) {
