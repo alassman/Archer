@@ -28,7 +28,23 @@ int main()
 	robot.readSensors();
 
 	//Execute the instructions
-	robot.setActuators(70,10);
+	vector<int> command(2,75);
+	for(int i = 0; i < 50; ++i) {
+		robot.setActuators(command);
+	}
+	command[0] = 0;
+	command[1] = 0;
+	robot.setActuators(command);
+	cout << "enter desired speed: ";
+	int left_motor, right_motor;
+	cin << left_motor << right_motor;
+	command[0] = left_motor;
+	command[1] = right_motor;
+	for (int i = 0; i < 50; ++i)
+	{
+		robot.setActuators(command):
+	}
+
 
 	return 0;
 }
