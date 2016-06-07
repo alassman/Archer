@@ -141,7 +141,7 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 			exit(1);
 		}
 
-		cout << "ARCHER SET SPEED: " << MotorSpeed[LEFT] << " " << MotorSpeed[RIGHT] << endl;
+		//cout << "ARCHER SET SPEED: " << MotorSpeed[LEFT] << " " << MotorSpeed[RIGHT] << endl;
 	}
 	checkTimming();
 }
@@ -149,11 +149,15 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 void Archer::setActuators(float speed, float rate)
 {
 	int counts_sec_aux[2];
+	cout << "about to run speedRate2Counts()..." << endl;
 	speedRate2Counts(speed, rate, counts_sec_aux);
-
+	cout <<  endl << "finished speedRate2Counts()..." << endl;
 	std::vector<int> counts_sec;
 	counts_sec.push_back(counts_sec_aux[0]);
-	counts_sec.push_back(counts_sec_aux[1]);	
+	counts_sec.push_back(counts_sec_aux[1]);
+
+	cout << endl << "motor commands: " << counts_sec_aux[0] << " : " << counts_sec_aux[1] << endl;
+
 
 	//NEED TO CONVERT FROM COUNTS/SECOND TO RPM
 
@@ -165,9 +169,15 @@ void Archer::setActuators(float speed, float rate)
 	counts_sec[0] = 1/counts_revolution * 60;
 	counts_sec[1] = 1/counts_revolution * 60; 
 
+	cout << endl << "motor commands in rpm: " << endl;
+	cout << "counts_sec[0]: " << counts_sec[0] << endl;
+	cout << "counts_sec[1]: " << counts_sec[1] << endl;
+
+
+
 	//Send motor commands
 	setActuators(counts_sec);
-	cout << "ARCHER SPEED RATE: " << speed << " " << math_functions::rad2deg(rate) << endl;
+	//cout << "ARCHER SPEED RATE: " << speed << " " << math_functions::rad2deg(rate) << endl;
 }
 
 int Archer::read_encoders() {
