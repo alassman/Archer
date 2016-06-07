@@ -1,6 +1,7 @@
 #include "Archer.h"
 #include "MathFunctions.h"
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
