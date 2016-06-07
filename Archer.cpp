@@ -121,7 +121,7 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 	//first value is speed of left_motor
 	//second value is speed of right_motor
 
-
+	cout << "in set actuators with vector..." << endl;
 	if(MotorSpeed[LEFT] == 0 && MotorSpeed[RIGHT] == 0) {
 		device.SetCommand(_EX);
 		setActuators(MotorSpeed);
