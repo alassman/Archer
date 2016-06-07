@@ -1,40 +1,32 @@
-#include <iostream>
-#include <stdio.h>
-#include <string.h>
-#include <cmath>
-#include <unistd.h>
+#include "Archer.h"
+#include "MathFunctions.h"
 #include <vector>
 
-#include "Archer.h"
+//Platform measurements
+const float TRACK = 110.0; // [mm]
+const int COUNTS_REVOLUTION = 2000; // [count/rev]
+const float WHEEL_DIAMETER = 150; // [mm]
+const float ENCODER_SCALE_FACTOR = PI * WHEEL_DIAMETER / COUNTS_REVOLUTION; // [mm/count]
 
-using namespace std;
+//factor difference between reported RPM from MC and actual rpm
+const float SPEED_FACTOR = 1.885; // [rpm]
+const int MAX_ACTUAL_SPEED = 40; // [rot/min]
+const int MAX_COMMAND_SPEED = 75; // [rot/min]
 
-
-
-int main() {
-/*
-	//Archer(float period, float track, float encoderScaleFactor);
-	track = 14", 35.5cm
-	gear ratio = 1:71
-		4*71 = 284
-	period = 10hz
-*/
-	Archer robot(0.1, 14, 1800);
-
-	vector<int> Mcommand(2,0);
-	Mcommand[0] = 10;
-	Mcommand[1] = 80;
-
-	for (int i = 0; i < 100; ++i)
-	{
-		robot.setActuators(Mcommand);
-		robot.readSensors();
-	}
-
-	cout << "done" << endl;
+// Runtime constant
+const float PERIOD = 0.1; // [sec]
 
 
+int main()
+{
+	//Only one robot can be created at the time
+	Archer robot(PERIOD, TRACK, ENCODER_SCALE_FACTOR); //Odometry only
 
+	//Read sensors
+	robot.readSensors();
+
+	//Execute the instructions
+	robot.setActuators(45, 10);
 
 	return 0;
 }

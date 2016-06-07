@@ -35,8 +35,10 @@ class Archer : public Robot
 {
 	protected:
 		RoboteqDevice device;
-		int motor1;
-		int motor2;
+		int left_motor;
+		int LEFT;
+		int right_motor;
+		int RIGHT;
 	public:
 		Archer(float period, float track, float encoderScaleFactor);
 		virtual ~Archer();
