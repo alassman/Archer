@@ -43,7 +43,7 @@ int main()
 	command[1] = right_motor;
 	for (int i = 0; i < 50; ++i)
 	{
-		robot.setActuators(command):
+		robot.setActuators(command);
 	}
 
 
