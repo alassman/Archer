@@ -31,6 +31,9 @@ int main()
 	vector<int> command(2,75);
 	for(int i = 0; i < 100; ++i) {
 		robot.setActuators(command);
+		if(i%2) {
+			robot.readSensors();
+		}
 	}
 
 	return 0;
