@@ -28,7 +28,7 @@ int main()
 	robot.readSensors();
 
 	//Execute the instructions
-	robot.setActuators(45, 10);
+	//robot.setActuators(45, 10);
 
 	return 0;
 }
