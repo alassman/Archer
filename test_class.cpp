@@ -29,7 +29,9 @@ int main()
 
 	//Execute the instructions
 	vector<int> command(2,75);
-	robot.setActuators(command);
+	for(int i = 0; i < 100; ++i) {
+		robot.setActuators(command);
+	}
 
 	return 0;
 }
