@@ -22,6 +22,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	SPEED_FACTOR = 1.885; // [rpm]
 	MAX_ACTUAL_SPEED = 40; // [rot/min]
 	MAX_COMMAND_SPEED = 75; // [rot/min]
+	counts_revolution = 2000; // [counts/rev]
 
 	//set motor left_motor and right_motor
 	left_motor = 1;
@@ -308,8 +309,8 @@ void Archer::setActuators(float speed, float rate)
 	if(!counts_sec[1] && counts_sec_aux[1]) counts_sec[1] = (counts_sec_aux[1] > 0) ? 1 : -1;
 
 	//convert from counts/sec to rpm
-	counts_sec[0] = 1/COUNTS_REVOLUTION * 60;
-	counts_sec[1] = 1/COUNTS_REVOLUTION * 60; 
+	counts_sec[0] = 1/counts_revolution * 60;
+	counts_sec[1] = 1/counts_revolution * 60; 
 
 	//Send motor commands
 	setActuators(counts_sec);
