@@ -1,6 +1,8 @@
 #ifndef __RoboteqDevice_H_
 #define __RoboteqDevice_H_
 
+#include <string>
+
 using namespace std;
 
 string ReplaceString(string source, string find, string replacement);
