@@ -38,7 +38,7 @@ class Archer : public Robot
 		int left_motor;
 		int LEFT;
 		int right_motor;
-		int RIGHT
+		int RIGHT;
 
 		float SPEED_FACTOR;
 		int MAX_ACTUAL_SPEED;
