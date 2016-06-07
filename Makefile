@@ -1,6 +1,6 @@
 OBJS = Robot.o Archer.o RoboteqDevice.o MathFunctions.o
 CC = g++
-CFLAGS = -Wall -static
+CFLAGS = -std=c++14 -Wall -Werror -Wextra -pedantic
 TARGET = main
 FILENAME = test_class.cpp
 
