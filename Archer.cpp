@@ -116,7 +116,6 @@ int Archer::readSensors()
 }
 
 void Archer::setActuators(vector<int> MotorSpeed) {
-	assert(MotorSpeed.size() == 2 && "MotorSpeed vector malformed");
 	//SetCommand(int commandItem, int index, int value)
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of left_motor
