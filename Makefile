@@ -11,7 +11,7 @@ Robot.o: Robot.cpp Robot.h
 	$(CC) $(CFLAGS) -c Robot.cpp 
 Archer.o: Archer.cpp Archer.h Robot.o RoboteqDevice.o ErrorCodes.h Constants.h
 	$(CC) $(CFLAGS) -c Archer.cpp
-RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h ErrorCodes.h
+RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h
 	$(CC) $(CFLAGS) -c RoboteqDevice.cpp
 MathFunctions.o: MathFunctions.cpp MathFunctions.h
 	$(CC) $(CFLAGS) -c MathFunctions.cpp
