@@ -32,12 +32,12 @@ int main()
 	vector<int> command(2,75);
 	bool cont = true;
 	while(cont) {
-		cout << "enter desired speed: ";
+		cout << endl << endl << endl << "enter desired motor speeds: ";
 		int left_motor, right_motor;
 		cin >> left_motor >> right_motor;
 		command[0] = left_motor;
 		command[1] = right_motor;
-		for (int i = 0; i < 30; ++i)
+		for (int i = 0; i < 40; ++i)
 		{
 			robot.setActuators(command);
 		}
