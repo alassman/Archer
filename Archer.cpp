@@ -122,25 +122,28 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 	//second value is speed of right_motor
 
 	cout << "in set actuators with vector..." << endl;
+	bool stop = false;
 	if(MotorSpeed[LEFT] == 0 && MotorSpeed[RIGHT] == 0) {
 		device.SetCommand(_EX);
-		setActuators(MotorSpeed);
-		device.SetCommand(_MG);
+		stop = true;
 	}
-	else {
-		int status;
-		//left_motor command
-		if((status = device.SetCommand(_S, left_motor, MotorSpeed[LEFT])) != RQ_SUCCESS) {
-			cout<<"left_motor speed_set failed with exit status: " << status;
-			exit(1);
-		}
-		//right_motorcommand
-		if((status = device.SetCommand(_S, right_motor, MotorSpeed[RIGHT])) != RQ_SUCCESS) {
-			cout<<"right_motorspeed_set failed with exit status: " << status;
-			exit(1);
-		}
+	
+	int status;
+	//left_motor command
+	if((status = device.SetCommand(_S, left_motor, MotorSpeed[LEFT])) != RQ_SUCCESS) {
+		cout<<"left_motor speed_set failed with exit status: " << status;
+		exit(1);
+	}
+	//right_motorcommand
+	if((status = device.SetCommand(_S, right_motor, MotorSpeed[RIGHT])) != RQ_SUCCESS) {
+		cout<<"right_motorspeed_set failed with exit status: " << status;
+		exit(1);
+	}
 
-		//cout << "ARCHER SET SPEED: " << MotorSpeed[LEFT] << " " << MotorSpeed[RIGHT] << endl;
+	//cout << "ARCHER SET SPEED: " << MotorSpeed[LEFT] << " " << MotorSpeed[RIGHT] << endl;
+
+	if(stop) {
+		device.SetCommand(_MG);
 	}
 	checkTimming();
 }
