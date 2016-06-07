@@ -15,5 +15,7 @@ RoboteqDevice.o: RoboteqDevice.cpp RoboteqDevice.h
 	$(CC) $(CFLAGS) -c RoboteqDevice.cpp
 MathFunctions.o: MathFunctions.cpp MathFunctions.h
 	$(CC) $(CFLAGS) -c MathFunctions.cpp
+test_connection: $(OBJS) test_connection.cpp
+	$(CC) $(CFLAGS) $(OBJS) test_connection.cpp -o $@ 
 clean:
 	\rm *.o $(TARGET) 
