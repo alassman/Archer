@@ -48,8 +48,12 @@ int main()
 		char input;
 		cin >> input;
 		switch(input) {
-			case 'Y': cont = true;
-			case 'N': cont = false;
+			case 'Y': 
+				cont = true;
+				break;
+			case 'N': 
+				cont = false;
+				break;
 			default: {
 				cout << "game over" << endl;
 				cont = false;
