@@ -120,6 +120,14 @@ void Archer::setActuators(vector<int> MotorSpeed) {
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of left_motor
 	//second value is speed of right_motor
+
+	if(MotorSpeed[LEFT] > MAX_COMMAND_SPEED) {
+		MotorSpeed[LEFT] = MAX_COMMAND_SPEED;
+	}
+	if(MotorSpeed[RIGHT] > MAX_COMMAND_SPEED) {
+		MotorSpeed[RIGHT] = MAX_COMMAND_SPEED;
+	}
+
 	bool stop = false;
 	if(MotorSpeed[LEFT] == 0 && MotorSpeed[RIGHT] == 0) {
 		device.SetCommand(_EX);
