@@ -19,6 +19,10 @@ using namespace std;
 Archer::Archer(float period, float track, float encoderScaleFactor) 
 	:Robot(period, track, encoderScaleFactor)
 {
+	SPEED_FACTOR = 1.885; // [rpm]
+	MAX_ACTUAL_SPEED = 40; // [rot/min]
+	MAX_COMMAND_SPEED = 75; // [rot/min]
+
 	//set motor left_motor and right_motor
 	left_motor = 1;
 	right_motor= 2;
