@@ -21,14 +21,14 @@ const float PERIOD = 0.1; // [sec]
 int main()
 {
 	//Only one robot can be created at the time
-	Archer ROBOT(PERIOD, TRACK, ENCODER_SCALE_FACTOR); //Odometry only
+	Archer device(PERIOD, TRACK, ENCODER_SCALE_FACTOR); //Odometry only
 
 	//Read sensors
-	ROBOT.readSensors();
+	device.readSensors();
 	//Execute the instructions
 	float speed = 60;
 	float rate = 10;
-	ROBOT.setActuators(speed,rate);
+	device.setActuators(speed,rate);
 	
 
 
