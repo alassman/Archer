@@ -46,7 +46,7 @@ class Archer : public Robot
 		Archer(float period, float track, float encoderScaleFactor);
 		virtual ~Archer();
 		virtual int readSensors();
-		virtual void setActuators(vector<int> MotorSpeed);
+		virtual void setActuators(vector<int> &MotorSpeed);
 		virtual void setActuators(float speed, float rate);
 		virtual int read_encoders();
 };
