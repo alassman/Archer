@@ -20,13 +20,17 @@ const float PERIOD = 0.1; // [sec]
 
 int main()
 {
+	vector<int> robotInfo(3);
+	robotInfo[0] = MAX_COMMAND_SPEED;
+	robotInfo[1] = COUNTS_REVOLUTION;
+	robotInfo[2] = PI * WHEEL_DIAMETER;
 	//Only one robot can be created at the time
-	Archer device(PERIOD, TRACK, ENCODER_SCALE_FACTOR); //Odometry only
+	Archer device(PERIOD, TRACK, ENCODER_SCALE_FACTOR, robotInfo); //Odometry only
 
 	//Read sensors
 	device.readSensors();
 	//Execute the instructions
-	float speed = 60;
+	float speed = 200; // [mm/sec]
 	float rate = math_functions::deg2rad(10.0);
 	device.setActuators(speed,rate);
 	

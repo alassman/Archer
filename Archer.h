@@ -41,9 +41,10 @@ class Archer : public Robot
 		int RIGHT;
 
 		int MAX_COMMAND_SPEED;
-		double counts_revolution;
+		double COUNT_REVOLUTION;
+		double CIRCUMFERENCE;
 	public:
-		Archer(float period, float track, float encoderScaleFactor);
+		Archer(float period, float track, float encoderScaleFactor, vector<int> robotInfo);
 		virtual ~Archer();
 		virtual int readSensors();
 		virtual void setActuators(vector<int> &MotorSpeed);

@@ -16,11 +16,12 @@ using namespace std;
 //multiply 2 or 4 by gear ratio for encoder scale factor
 //track=distance between two wheels
 
-Archer::Archer(float period, float track, float encoderScaleFactor) 
+Archer::Archer(float period, float track, float encoderScaleFactor, vector<int> robotInfo) 
 	:Robot(period, track, encoderScaleFactor)
 {
-	MAX_COMMAND_SPEED = 75; // [rot/min]
-	counts_revolution = 568.0; // [counts/rev]
+	MAX_COMMAND_SPEED = robootInfo[0]; // [rot/min]
+	COUNTS_REVOLUTION = robotInfo[1]; // [counts/rev]
+	CIRCUMFERENCE = ROBOTINFO[2]; // [MM]
 
 	//set motor left_motor and right_motor
 	left_motor = 1;
@@ -116,12 +117,15 @@ int Archer::readSensors()
 }
 
 void Archer::setActuators(vector<int> &MotorSpeed) {
-	//SetCommand(int commandItem, int index, int value)
-	//assuming pmotorSpeed is an array of size two
-	//first value is speed of left_motor
-	//second value is speed of right_motor
+	//assuming MotorSpeed is an array of size two
+	//first value is speed of left_motor in [mm/sec]
+	//second value is speed of right_motor in [mm/sec]
 
-	cout << "MotorSpeed received: " << MotorSpeed[0] << " / " << MotorSpeed[1] << endl;
+	//convert from [mm/sec] to [rot/min]
+	MotorSpeed[LEFT] *= 60 / CIRCUMFERENCE;
+	MotorSpeed[RIGHT] *= 60 / CIRCUMFERENCE;
+
+	cout << "MotorSpeed received: " << MotorSpeed[LEFT] << " / " << MotorSpeed[RIGHT] << endl;
 
 	if(MotorSpeed[LEFT] > MAX_COMMAND_SPEED) {
 		MotorSpeed[LEFT] = MAX_COMMAND_SPEED;
@@ -175,15 +179,9 @@ void Archer::setActuators(float speed, float rate)
 	if(!counts_sec[0] && counts_sec_aux[0]) counts_sec[0] = (counts_sec_aux[0] > 0) ? 1 : -1;
 	if(!counts_sec[1] && counts_sec_aux[1]) counts_sec[1] = (counts_sec_aux[1] > 0) ? 1 : -1;
 
-	//convert from counts/sec to rpm
-	counts_sec[0] *= 1/counts_revolution * 60;
-	counts_sec[1] *= 1/counts_revolution * 60; 
-
-	cout << endl << "motor commands in rpm: " << endl;
-	cout << "counts_sec[0]: " << counts_sec[0] << endl;
-	cout << "counts_sec[1]: " << counts_sec[1] << endl;
-
-
+	//convert from counts/sec to mm/sec
+	counts_sec[0] *= mEncoderScaleFactor;
+	counts_sec[1] *= mEncoderScaleFactor; 
 
 	//Send motor commands
 	setActuators(counts_sec);
