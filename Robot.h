@@ -57,7 +57,7 @@ class Robot
 		Robot(float period, float track, float encoderScaleFactor);
 		virtual ~Robot();
 		virtual int readSensors() = 0;
-		virtual void setActuators(std::vector<int> MotorSpeed) = 0;
+		virtual void setActuators(std::vector<int> &MotorSpeed) = 0;
 		virtual void setActuators(float speed, float rate) = 0;
 		virtual void setEncoderLimit(int pCountSecLimit);
 		inline float getDisplacement() const {return mDisplacement;};
