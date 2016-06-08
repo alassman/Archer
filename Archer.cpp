@@ -121,11 +121,13 @@ void Archer::setActuators(vector<int> &MotorSpeed) {
 	//first value is speed of left_motor in [mm/sec]
 	//second value is speed of right_motor in [mm/sec]
 
+	cout << "MotorSpeed received: " << MotorSpeed[LEFT] << " / " << MotorSpeed[RIGHT] << endl;
+
 	//convert from [mm/sec] to [rot/min]
 	MotorSpeed[LEFT] *= 60 / CIRCUMFERENCE;
 	MotorSpeed[RIGHT] *= 60 / CIRCUMFERENCE;
 
-	cout << "MotorSpeed received: " << MotorSpeed[LEFT] << " / " << MotorSpeed[RIGHT] << endl;
+	cout << "MotorSpeed in rpm: " << MotorSpeed[LEFT] << " / " << MotorSpeed[RIGHT] << endl;
 
 	if(MotorSpeed[LEFT] > MAX_COMMAND_SPEED) {
 		MotorSpeed[LEFT] = MAX_COMMAND_SPEED;
