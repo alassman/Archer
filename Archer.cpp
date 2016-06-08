@@ -115,7 +115,7 @@ int Archer::readSensors()
 	return DATA_READY;
 }
 
-void Archer::setActuators(vector<int> MotorSpeed) {
+void Archer::setActuators(vector<int> &MotorSpeed) {
 	//SetCommand(int commandItem, int index, int value)
 	//assuming pmotorSpeed is an array of size two
 	//first value is speed of left_motor
