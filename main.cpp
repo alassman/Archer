@@ -27,7 +27,7 @@ int main()
 	device.readSensors();
 	//Execute the instructions
 	float speed = 60;
-	float rate = 10;
+	float rate = math_functions::deg2rad(10.0);
 	device.setActuators(speed,rate);
 	
 
