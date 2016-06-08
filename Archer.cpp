@@ -19,9 +19,9 @@ using namespace std;
 Archer::Archer(float period, float track, float encoderScaleFactor, vector<int> robotInfo) 
 	:Robot(period, track, encoderScaleFactor)
 {
-	MAX_COMMAND_SPEED = robootInfo[0]; // [rot/min]
+	MAX_COMMAND_SPEED = robotInfo[0]; // [rot/min]
 	COUNTS_REVOLUTION = robotInfo[1]; // [counts/rev]
-	CIRCUMFERENCE = ROBOTINFO[2]; // [MM]
+	CIRCUMFERENCE = robotInfo[2]; // [MM]
 
 	//set motor left_motor and right_motor
 	left_motor = 1;

@@ -41,7 +41,7 @@ class Archer : public Robot
 		int RIGHT;
 
 		int MAX_COMMAND_SPEED;
-		double COUNT_REVOLUTION;
+		double COUNTS_REVOLUTION;
 		double CIRCUMFERENCE;
 	public:
 		Archer(float period, float track, float encoderScaleFactor, vector<int> robotInfo);
