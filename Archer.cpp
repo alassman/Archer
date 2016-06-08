@@ -121,6 +121,8 @@ void Archer::setActuators(vector<int> &MotorSpeed) {
 	//first value is speed of left_motor
 	//second value is speed of right_motor
 
+	cout << "MotorSpeed received: " << MotorSpeed[0] << " / " << MotorSpeed[1] << endl;
+
 	if(MotorSpeed[LEFT] > MAX_COMMAND_SPEED) {
 		MotorSpeed[LEFT] = MAX_COMMAND_SPEED;
 	}
@@ -164,7 +166,7 @@ void Archer::setActuators(float speed, float rate)
 	counts_sec.push_back(counts_sec_aux[0]);
 	counts_sec.push_back(counts_sec_aux[1]);
 
-	cout << endl << "motor commands: " << counts_sec_aux[0] << " : " << counts_sec_aux[1] << endl;
+	cout << endl << "counts_sec: " << counts_sec_aux[0] << " / " << counts_sec_aux[1] << endl;
 
 
 	//NEED TO CONVERT FROM COUNTS/SECOND TO RPM

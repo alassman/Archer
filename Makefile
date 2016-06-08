@@ -2,7 +2,7 @@ OBJS = Robot.o Archer.o RoboteqDevice.o MathFunctions.o
 CC = g++
 CFLAGS = -std=c++14 -Wall -Werror -Wextra -pedantic
 TARGET = main
-FILENAME = test_class.cpp
+FILENAME = main.cpp
 
 all: $(TARGET)
 $(TARGET): $(OBJS) $(FILENAME)
@@ -18,4 +18,4 @@ MathFunctions.o: MathFunctions.cpp MathFunctions.h
 test_connection: $(OBJS) test_connection.cpp
 	$(CC) $(CFLAGS) $(OBJS) test_connection.cpp -o $@ 
 clean:
-	\rm *.o $(TARGET) 
+	\rm *.o $(TARGET)
