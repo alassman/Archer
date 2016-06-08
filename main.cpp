@@ -30,7 +30,7 @@ int main()
 	//Read sensors
 	device.readSensors();
 	//Execute the instructions
-	float speed = 200; // [mm/sec]
+	float speed = 500; // [mm/sec]
 	float rate = math_functions::deg2rad(10.0);
 	for (int i = 0; i < 100; ++i)
 	{
