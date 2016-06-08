@@ -89,11 +89,15 @@ void Robot::speedRate2Counts(float speed, float rate, int *pCountSec)
 	float left_speed = (speed - rate * mTrack / 2.0) / mEncoderScaleFactor;
 	float right_speed = (speed + rate * mTrack / 2.0) / mEncoderScaleFactor;
 
+	double hold1 = rate * mTrack;
+	double hold2 = hold1 / 2.0;
+	double hold3 = speed - hold2;
+	double hold4 = hold3 / mEncoderScaleFactor;
 
-	cout << endl << "speed: " << speed << endl;
-	cout << "rate: " << rate << endl;
-	cout << "mTrack: " << mTrack << endl;
-	cout << "mEncoderScaleFactor: " << mEncoderScaleFactor << endl << endl;
+	cout << endl << "rate * mTrack: " << hold1 << endl;
+	cout << "^ /2: " << hold2 << endl;
+	cout << "speed - ^: " << hold3 << endl;
+	cout << "^ / mEncoderScaleFactor" << hold4 << endl << endl;
 
 	cout << endl << "left [counts/sec]: " << left_speed << endl;
 	cout << "right [counts/sec]: " << right_speed << endl << endl;
