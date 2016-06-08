@@ -41,7 +41,7 @@ class Archer : public Robot
 		int RIGHT;
 
 		int MAX_COMMAND_SPEED;
-		int counts_revolution;
+		double counts_revolution;
 	public:
 		Archer(float period, float track, float encoderScaleFactor);
 		virtual ~Archer();

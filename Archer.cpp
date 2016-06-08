@@ -20,7 +20,7 @@ Archer::Archer(float period, float track, float encoderScaleFactor)
 	:Robot(period, track, encoderScaleFactor)
 {
 	MAX_COMMAND_SPEED = 75; // [rot/min]
-	counts_revolution = 568; // [counts/rev]
+	counts_revolution = 568.0; // [counts/rev]
 
 	//set motor left_motor and right_motor
 	left_motor = 1;
@@ -176,8 +176,8 @@ void Archer::setActuators(float speed, float rate)
 	if(!counts_sec[1] && counts_sec_aux[1]) counts_sec[1] = (counts_sec_aux[1] > 0) ? 1 : -1;
 
 	//convert from counts/sec to rpm
-	counts_sec[0] = 1/counts_revolution * 60;
-	counts_sec[1] = 1/counts_revolution * 60; 
+	counts_sec[0] *= 1/counts_revolution * 60;
+	counts_sec[1] *= 1/counts_revolution * 60; 
 
 	cout << endl << "motor commands in rpm: " << endl;
 	cout << "counts_sec[0]: " << counts_sec[0] << endl;
