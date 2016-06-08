@@ -89,6 +89,8 @@ void Robot::speedRate2Counts(float speed, float rate, int *pCountSec)
 	float left_speed = (speed - rate * mTrack / 2.0) / mEncoderScaleFactor;
 	float right_speed = (speed + rate * mTrack / 2.0) / mEncoderScaleFactor;
 
+	double counts_revolution = 568;
+
 	cout << "speed in rpm after distribution:" << endl;
 	cout << "left_speed: " << left_speed * 1/counts_revolution * 60 << endl;
 	cout << "right_speed: " << right_speed * 1/counts_revolution * 60 << endl;
